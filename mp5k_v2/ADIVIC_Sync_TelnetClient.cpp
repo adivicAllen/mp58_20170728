@@ -80,7 +80,8 @@ bool ADIVIC_Sync_TelnetClient::IsWaitTillReadToken(std::string& ack, const std::
 
 		ack_temp = m_TelnetImpl->ClientPtr->m_AckDeque.front();
 		m_TelnetImpl->ClientPtr->m_AckDeque.pop_front();
-		int pos = ack_temp.find('\0');
+        // int pos = ack_temp.find('\0');  // allen
+        std::size_t pos = ack_temp.find('\0');
 		if( pos != ack_temp.length()-1 && pos!= std::string::npos) 
 		{
 			m_TelnetImpl->ClientPtr->m_AckDeque.push_front( std::string( ack_temp , pos+1 , ack_temp.length() -pos+1) );
@@ -117,7 +118,8 @@ bool ADIVIC_Sync_TelnetClient::IsWaitTillReadToken(char* ack, const std::string&
 
 		ack_temp = m_TelnetImpl->ClientPtr->m_AckDeque.front();
 		m_TelnetImpl->ClientPtr->m_AckDeque.pop_front();
-		int pos = ack_temp.find('\0');
+        // int pos = ack_temp.find('\0');
+        std::size_t pos = ack_temp.find('\0');
 		if( pos != ack_temp.length()-1 && pos!= std::string::npos) 
 		{
 			m_TelnetImpl->ClientPtr->m_AckDeque.push_front( std::string( ack_temp , pos+1 , ack_temp.length() -pos+1) );
