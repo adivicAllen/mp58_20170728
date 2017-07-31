@@ -180,7 +180,7 @@ std::string data_est[] =
 
 const static bool SubString( std::string& data, int beginPos)
 {
-	if( data.length() > beginPos )
+    if( (data.length() > beginPos )
 	{
 		data = data.substr( 2, data.size() );
 		return true;
@@ -205,7 +205,7 @@ void ResetSub()
 		isGPSAdd = false;
 
 
-		strBuffer[1024]; // R/W
+
 		memset(strBuffer,0,sizeof(strBuffer));
 		memset(preIP,0x20,sizeof(preIP));
 		memset(preGPSIP,0x20,sizeof(preGPSIP));
@@ -269,7 +269,7 @@ UINT mp5k_init( void )
 		isInit = true;
 		// write to log
 #if MP5KLOG
-		sprintf_s( strBuffer , "mp5k_init:[Watch dog is standby]" );
+        sprintf_s( strBuffer , "mp5k_init:[Watch dog is standby]" );
 		Mp5kLog.WriteLine( strBuffer );
 #endif
 	}
@@ -323,7 +323,7 @@ UINT mp5k_add( const char* ip, UINT& handle )
 		{
 // write to log
 #if MP5KLOG
-			sprintf_s(strBuffer, "mp5k_add:[MP5000 Start]", ip, id);
+            sprintf_s(strBuffer, "mp5k_add:[MP5000 Start], ip =%s, id =%d", ip, id);
 			Mp5kLog.WriteLine( strBuffer );
 #endif
 			return MP5K_CONNECT_TIMEOUT;
@@ -392,7 +392,8 @@ UINT mp5k_delete( const UINT& handle )
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle != NULL )
+    //if ( handle != NULL )  //allen
+    if (handle)
     {
         // notice: Watchdog close
       //  Tester->stop();
@@ -438,7 +439,7 @@ UINT mp5k_delete( const UINT& handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s(strBuffer, "mp5k_delete:[Handle error]", handle);
+        sprintf_s(strBuffer, "mp5k_delete:[Handle error]");
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -451,11 +452,12 @@ UINT mp5k_trigger_setting( const UINT& handle , const MP5K_TriggerConfig& trigge
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    // if ( handle == NULL )  // allen
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_trigger_setting:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_trigger_setting:[Handle error]"  );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -509,11 +511,11 @@ UINT mp5k_correction_setting( const UINT& handle , const MP5K_CorrectionConfig& 
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    if (  !handle )    // allen
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_correction_setting:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_correction_setting:[Handle error]" );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -551,11 +553,12 @@ UINT mp5k_xtaltrim_setting( const UINT& handle , const MP5K_XtalTrimConfig& trim
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    // if ( handle == NULL )
+    if ( !handle  )   // allen
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_xtaltrim_setting:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_xtaltrim_setting:[Handle error]"  );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -688,11 +691,12 @@ UINT mp5k_xtaltrim_getoffset( const UINT& handle , double& OffsetHz )
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    //if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_xtaltrim_getoffset:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_xtaltrim_getoffset:[Handle error]"  );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -760,11 +764,12 @@ UINT mp5k_cal_setting( const UINT& handle , const MP5K_CalConfig& cal )
         return MP5K_TESTER_NULL;
 
     }
-    if ( handle == NULL )
+  //  if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_cal_setting:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_cal_setting:[Handle error]"  );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -915,11 +920,12 @@ UINT mp5k_cal_meas(const UINT& handle, double& PowerdBm)
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+ //   if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_cal_meas:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_cal_meas:[Handle error]"  );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -981,11 +987,12 @@ UINT mp5k_tx_setting( const UINT& handle , const MP5K_TxTestConfig& txtest )
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+//    if ( handle == NULL )
+     if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_tx_setting:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_tx_setting:[Handle error]" );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -1185,11 +1192,12 @@ UINT mp5k_tx_meas( const UINT& handle , MP5K_TxTestMeas& txmeas )
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+//    if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_tx_meas:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_tx_meas:[Handle error]" );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -1446,11 +1454,12 @@ UINT mp5k_rx_setting( const UINT& handle , const MP5K_RxTestConfig& rxtest )
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+  //  if ( handle == NULL )
+    if ( !handle )   //allen
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_rx_setting:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_rx_setting:[Handle error]"  );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -1674,11 +1683,12 @@ UINT mp5k_rx_start(const UINT& handle)
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+//    if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_rx_start:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_rx_start:[Handle error]"  );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -1719,11 +1729,12 @@ UINT mp5k_set_dutid( const UINT& handle , const UINT& id )
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    // if ( handle == NULL )
+    if ( !handle  )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_set_dutid:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_set_dutid:[Handle error]"  );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -1750,11 +1761,12 @@ UINT mp5k_check_id( const UINT& handle , const UINT& id , const UINT& timeout_ms
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    //if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_check_id:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_check_id:[Handle error]" );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -1770,7 +1782,7 @@ UINT mp5k_check_id( const UINT& handle , const UINT& id , const UINT& timeout_ms
         {
             // write to log
 #if MP5KLOG
-            sprintf_s( strBuffer , "mp5k_check_id:[Timeout]" , handle );
+            sprintf_s( strBuffer , "mp5k_check_id:[Timeout], handle = %d" , handle );
             Mp5kLog.WriteLine( strBuffer );
 #endif
             return MP5K_CHECK_ID_TIMEOUT;
@@ -1794,7 +1806,7 @@ UINT mp5k_check_id( const UINT& handle , const UINT& id , const UINT& timeout_ms
     while ( timer_count < timeout_ms );
     // write to log
 #if MP5KLOG
-    sprintf_s( strBuffer , "mp5k_check_id:[Timeout]" , handle );
+    sprintf_s( strBuffer , "mp5k_check_id:[Timeout] , handle = %d" , handle );
     Mp5kLog.WriteLine( strBuffer );
 #endif
     return MP5K_CHECK_ID_TIMEOUT_BY_CUSTOM;
@@ -1835,11 +1847,13 @@ UINT mp5k_wait_server_ready( const UINT& handle , const UINT& Milliseconds )
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+
+    // if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_wait_server_ready:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_wait_server_ready:[Handle error]"  );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -1852,7 +1866,7 @@ UINT mp5k_wait_server_ready( const UINT& handle , const UINT& Milliseconds )
         {
             // write to log
 #if MP5KLOG
-            sprintf_s( strBuffer , "mp5k_wait_server_ready:[Timeout]" , handle );
+            sprintf_s( strBuffer , "mp5k_wait_server_ready:[Timeout], handle = %d" , handle );
             Mp5kLog.WriteLine( strBuffer );
 #endif
             return MP5K_CHECK_ID_TIMEOUT;
@@ -1883,7 +1897,8 @@ UINT mp5k_release_lock( const UINT& handle )
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    //if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
@@ -2003,11 +2018,12 @@ UINT mp5k_tx_meas_extend( const UINT& handle , MP5K_TxTestMeasExtend& txmeasext 
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL)
+    //if ( handle == NULL)
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_tx_meas:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_tx_meas:[Handle error]" );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -2222,11 +2238,12 @@ UINT mp5k_BT_tx_setting (const UINT& handle, const MP5K_BT_TxTestConfig& Setting
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    //if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_tx_setting:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_tx_setting:[Handle error]" );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -2355,11 +2372,12 @@ UINT mp5k_BT_tx_meas(const UINT& handle, MP5K_BT_TxTestMeas& Bt_Tx_Meas)
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    //if ( handle == NULL )
+    if ( ! handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_BT_tx_meas:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_BT_tx_meas:[Handle error]" );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -2541,11 +2559,12 @@ UINT mp5k_BT_tx_meas_extend(const UINT& handle, MP5K_BT_TxTestMeasExtend& Bt_Tx_
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    // if ( handle == NULL )
+    if ( !handle  )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_BT_tx_meas_extend:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_BT_tx_meas_extend:[Handle error]" );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -2668,11 +2687,12 @@ UINT mp5k_BT_rx_setting(const UINT& handle, const MP5K_BT_RxTestConfig& Setting)
     {
         return MP5K_TESTER_NULL;
     }
-    if ( handle == NULL )
+    //if ( handle == NULL )
+    if ( !handle )
     {
         // write to log
 #if MP5KLOG
-        sprintf_s( strBuffer , "mp5k_BT_rx_setting:[Handle error]" , handle );
+        sprintf_s( strBuffer , "mp5k_BT_rx_setting:[Handle error]" );
         Mp5kLog.WriteLine( strBuffer );
 #endif
         return MP5K_HANDLE_ERROR;
@@ -2699,7 +2719,7 @@ UINT mp5k_BT_rx_setting(const UINT& handle, const MP5K_BT_RxTestConfig& Setting)
 	}
 	
 
-	/* allen 20170623
+
     sprintf_s( strBuffer ,
                "BT;:ROUTe:PORT:RESource RF%d,VSG;:OUTPut:FREQuency %dMHz;:OUTPut:POWer:LEVel %.2f;:OUTPut:LOOP:COUNt %d;:OUTPut:WAVeform:LOAD \\MP\\BT\\BT_%s_PRBS9.mp5000vsg" ,
                Tester->gloBtRXConfig.UseRFPort ,
@@ -2708,7 +2728,9 @@ UINT mp5k_BT_rx_setting(const UINT& handle, const MP5K_BT_RxTestConfig& Setting)
                Tester->gloBtRXConfig.BitCount ,
                packetType
              );
-	*/
+
+
+    /*
 	  sprintf_s( strBuffer ,
                "BT;:ROUTe:PORT:RESource RF%d,VSG;:OUTPut:FREQuency %dMHz;:OUTPut:POWer:LEVel %.2f;:OUTPut:LOOP:COUNt %d" ,
                Tester->gloBtRXConfig.UseRFPort ,
@@ -2717,6 +2739,7 @@ UINT mp5k_BT_rx_setting(const UINT& handle, const MP5K_BT_RxTestConfig& Setting)
                Tester->gloBtRXConfig.BitCount ,
                packetType
              );
+     */
     Tester->mp5k_list.at( handle )->Send( strBuffer );
     
     if ( !Tester->mp5k_list.at( handle )->IsWaitTillReadToken( ackBuffer , "\n" ) )
