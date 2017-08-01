@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "Chroma_API_V2.h"
 #define MAX_STRING_LEN			1014
 #define  DEFAULT_ERROR 9999

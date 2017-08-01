@@ -1,13 +1,13 @@
 #ifndef CHROMA_API_V2_H
 #define CHROMA_API_V2_H
 
-#include "AdivicTClient.h"
+// #include "AdivicTClient.h"
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <Windows.h>
-#include <atlstr.h>
-#include <WinBase.h>
+//#include <Windows.h>
+//#include <atlstr.h>
+//#include <WinBase.h>
 #include <math.h>
 #include "Global_ErrorCode_Def.h"
 #include "Chroma_MutiInstr_API_EXP_V2.h"

@@ -33,7 +33,6 @@ HEADERS += \
     ../MP5000_SCPI.h \
     ../resource.h \
     ../Sync_TelnetClient.h \
-    ../targetver.h \
     ../TOP_LEVEL.h \
     ../types.h
 
