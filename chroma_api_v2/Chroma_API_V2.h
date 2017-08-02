@@ -16,6 +16,7 @@
 #include "Dll_Common.h"
 #include "IniSetting.h"
 #include "mp5k.h"
+#include <QString>
 
  
 
@@ -35,15 +36,15 @@ public:
 
 	// TODO: add your methods here.
 	static bool s_bIsOpenProfile;
-	static CString s_szConfigFilePath;
+    static QString s_szConfigFilePath;
 	static bool s_bIsServer_Connected[MaxInstr];
 //-----------------------------------------------------
 	static bool s_bIsServer_OnOff[MaxInstr];
-	static CString s_szServer_IP[MaxInstr];
-	static CString s_szServer_Port[MaxInstr];//Port Number
+    static QString s_szServer_IP[MaxInstr];
+    static QString s_szServer_Port[MaxInstr];//Port Number
 	//static bool s_bEnableLossFileNotExist;
-	static CString s_szServer_PortLoss[MaxInstr];//PortLoss File Name
-	static vector<CString> s_vec_WaveformPath;
+    static QString s_szServer_PortLoss[MaxInstr];//PortLoss File Name
+    static vector<QString> s_vec_WaveformPath;
 //------------------------------------------------------------
 
 	static char s_ErrMessage[1024];
@@ -105,8 +106,8 @@ public:
 	bool TestFunction(); //-----Test
 	USHORT InitFunction(const char *IniFilePath);//////////////////////////////////////////////////////////////////////////
 	USHORT ConfingFileParser();
-	USHORT LoadPortDifference(CString szFilePath);
-	USHORT LoadCableLoss(CString szFilePath);
+    USHORT LoadPortDifference(QString szFilePath);
+    USHORT LoadCableLoss(QString szFilePath);
 	USHORT NetConnect(bool bIsConnect);
 	USHORT UploadWaveform(const char *WaveformPath,bool bIsOverLoad=false);
 	const char* GetLastErrorMessage();

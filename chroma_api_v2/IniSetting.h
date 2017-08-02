@@ -9,6 +9,7 @@
 #include <vector>
 #include "Dll_Common.h"
 #include "Global_ErrorCode_Def.h"
+#include <QString>
 
 using namespace std;
 
@@ -18,16 +19,16 @@ public:
 	IniSetting(void);
 	~IniSetting(void);
 
-	CString s_szConfigFilePath;
+    QString s_szConfigFilePath;
 
 	
-	CString s_szServer_IP[MaxInstr];
-	CString s_szServer_Port[MaxInstr]; //Port Number
+    QString s_szServer_IP[MaxInstr];
+    QString s_szServer_Port[MaxInstr]; //Port Number
 	bool s_bIsServer_OnOff[MaxInstr];
-	CString s_szServer_PortLoss[MaxInstr]; //PortLoss File Name
-	vector<CString> s_vec_WaveformPath;
+    QString s_szServer_PortLoss[MaxInstr]; //PortLoss File Name
+    vector<QString> s_vec_WaveformPath;
 
-	USHORT SetConfigFilePath(CString csFilePath);
+    USHORT SetConfigFilePath(QString csFilePath);
 	USHORT ParserConfigFile();
 	USHORT WriteConfigFile();
 

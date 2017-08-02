@@ -1,5 +1,8 @@
 #include <QString>
+#include <QDir>
+#include <QSettings>
 #include "Chroma_API_V2.h"
+#define   sprintf_s  sprintf
 #define MAX_STRING_LEN			1014
 #define  DEFAULT_ERROR 9999
 //CChroma_API_V2 theAPP; //****The Only one, don't delete.**** 
@@ -9,36 +12,40 @@ CChroma_API_V2 MultiAPP[MaxInstr];
 // This is the constructor of a class that has been exported.
 // see Chroma_API_V2.h for the class definition
 bool CChroma_API_V2::s_bIsOpenProfile=false;
-CString  CChroma_API_V2::s_szConfigFilePath="";
+QString  CChroma_API_V2::s_szConfigFilePath="";
 bool CChroma_API_V2::s_bIsServer_Connected[]={false,false};
 bool CChroma_API_V2::s_bIsServer_OnOff[]={false,false};
-CString CChroma_API_V2::s_szServer_IP[]={"",""};
-CString CChroma_API_V2::s_szServer_Port[]={"",""};
-CString CChroma_API_V2::s_szServer_PortLoss[]={"",""};
-//CString CChroma_API_V2::s_szServer_PortDef[]={"",""};
-vector<CString> CChroma_API_V2::s_vec_WaveformPath;
+QString CChroma_API_V2::s_szServer_IP[]={"",""};
+QString CChroma_API_V2::s_szServer_Port[]={"",""};
+QString CChroma_API_V2::s_szServer_PortLoss[]={"",""};
+//QString CChroma_API_V2::s_szServer_PortDef[]={"",""};
+vector<QString> CChroma_API_V2::s_vec_WaveformPath;
 char CChroma_API_V2::s_ErrMessage[];
 
 // define MP5800 wifi control
 
 
 
-string CstringToString(CString szInput)
+string CstringToString(QString szInput)
 {
 	string szOutput="";	
-	int i=szInput.GetLength();
+    /*
+    int i=szInput.length()   ;
 	char *chr=new char[i+1];
 	WideCharToMultiByte(CP_ACP,0,szInput.GetBuffer(),-1,chr,szInput.GetLength(),NULL,NULL);
 	chr[i]='\0';
 	szOutput=chr;	
 	delete chr;
+    */
+    szOutput = szInput.toStdString();
 	return szOutput;
 }
 CChroma_API_V2::CChroma_API_V2()
 {
 	m_f_Center_CurrentFreq=0.0f;
 	m_fMarkOffset=-9999;
-	ZeroMemory(m_PortLossEnable,sizeof(m_PortLossEnable) );
+//	ZeroMemory(m_PortLossEnable,sizeof(m_PortLossEnable) );  // allen
+    memset (m_PortLossEnable,0,sizeof(m_PortLossEnable));
 	m_CurrentVsaPort=999;
 	m_uiVsa_Port=999;
 	m_uiRBW_Enum=999;
@@ -250,12 +257,13 @@ bool CChroma_API_V2::SortLossPointTable(vector<LossPoint>& LossPointTable)
 }
 void CChroma_API_V2::CurrentFilePath(char * chFileDir)
 {
+    /*
 	char szCurrentDir[255];
 	//WIN32_FIND_DATAA FindFileData;
     //HANDLE	hFind=INVALID_HANDLE_VALUE;
     HANDLE	hFind =  NULL;
 	string strFileDir="",strFileName="";
-	CString csFileName="";
+    QString csFileName="";
 	bool bIsFind=false;
 	int iIndex=0,iCount=0;
 
@@ -264,7 +272,13 @@ void CChroma_API_V2::CurrentFilePath(char * chFileDir)
 	strFileDir=szCurrentDir;
 	strFileDir=strFileDir+"\\*";
 	memcpy(chFileDir,strFileDir.c_str(),strFileDir.size());
+    */
+    QString temp;
+    temp = QDir::currentPath() + "/*";
+    chFileDir = temp.toLatin1().data();
+
 }
+
 void CChroma_API_V2::SetCurrentErrorMessage(USHORT usErrorCode)
 {
 	switch(usErrorCode)
@@ -337,10 +351,10 @@ bool CChroma_API_V2::SaveVsaData(const string *strTableName)
 }
 USHORT CChroma_API_V2::InitFunction(const char *IniFilePath)
 {
-	
+
 	//HANDLE	hFind=INVALID_HANDLE_VALUE;
 	string strFileDir="",strFilePath="",strFileName="";
-	CString csFileName="";
+    QString csFileName="";
 	bool bIsFind=false;
 	int iIndex=0,iCount=0;
 	USHORT usState=SUCCESS;
@@ -350,8 +364,11 @@ USHORT CChroma_API_V2::InitFunction(const char *IniFilePath)
 	}
 	
 	strFilePath=IniFilePath;
-	fstream  Openfile; 
-	Openfile.open(strFilePath,ios::in|ios::binary);
+
+    std:: fstream  Openfile;
+
+    Openfile.open(strFilePath.c_str(),std::fstream::in| std::fstream::binary);
+
 	if(!Openfile.is_open())
 	{
 		sprintf_s(s_ErrMessage,"File path:%s open fail",strFilePath.c_str());
@@ -366,12 +383,15 @@ USHORT CChroma_API_V2::InitFunction(const char *IniFilePath)
 }
 USHORT CChroma_API_V2::ConfingFileParser()
 {
-	CString szSectionName=_T("");
-	CString szFieldName=_T("");
-	CString szReadString=_T("");
+    QString szSectionName=("");
+    QString szFieldName=("");
+    QString szReadString=("");
 //----------------------------------------------------------------------------------
-	szSectionName=_T("Server Config Setting");
- 	szFieldName=_T("Server_1_IP");
+    szSectionName=("Server Config Setting");
+    szFieldName=("Server_1_IP");
+    QStettings *setting = 0;
+    setting = new QSettinggs (s_szConfigFilePath, QSetting::IniFormat);
+    QString ret = setting->value(szSectionName + szFieldName , "r" ).toString();
 	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
  	szReadString.ReleaseBuffer();
 	s_szServer_IP[0]=szReadString;
@@ -479,7 +499,7 @@ USHORT CChroma_API_V2::UploadWaveform(const char *WaveformPath,bool bIsOverLoad)
 	}
 	return SUCCESS;
 }
-USHORT CChroma_API_V2::LoadCableLoss(CString szFilePath)
+USHORT CChroma_API_V2::LoadCableLoss(QString szFilePath)
 {
 	
 	string  strFilePath="";
@@ -500,8 +520,8 @@ USHORT CChroma_API_V2::LoadCableLoss(CString szFilePath)
 	vec_DutCableLossList.clear();
 	LossPoint PointLoss;
 	std::getline(Openfile, strline); //Skip first line
-	CStringA csReadLine=_T("");
-	CStringA csData[9],Symbol=_T(",");
+    QStringA csReadLine=_T("");
+    QStringA csData[9],Symbol=_T(",");
 	iIndex=0;
 	for(int i=0;i<Port_Nums;i++)
 	{
@@ -517,7 +537,7 @@ USHORT CChroma_API_V2::LoadCableLoss(CString szFilePath)
 		iCount=0;
 		while(iIndex<csReadLine.GetLength())
 		{
-			CStringA csTok=csReadLine.Tokenize(Symbol,iIndex);
+            QStringA csTok=csReadLine.Tokenize(Symbol,iIndex);
 			csData[iCount++]=csTok.Trim("\t\n ");		
 		}
 		float fTemp;
@@ -577,7 +597,7 @@ USHORT CChroma_API_V2::LoadCableLoss(CString szFilePath)
 
 	return SUCCESS;
 }
-USHORT CChroma_API_V2::LoadPortDifference(CString szFilePath)
+USHORT CChroma_API_V2::LoadPortDifference(QString szFilePath)
 {
 // 	string  strFilePath="";
 // 	strFilePath=CstringToString(szFilePath);
@@ -597,8 +617,8 @@ USHORT CChroma_API_V2::LoadPortDifference(CString szFilePath)
 // 	vec_InstrPortDefList.clear();
 // 	LossPoint PointLoss;
 // 	std::getline(Openfile, strline); //Skip first line
-// 	CStringA csReadLine=_T("");
-// 	CStringA csData[9],Symbol=_T(",");
+// 	QStringA csReadLine=_T("");
+// 	QStringA csData[9],Symbol=_T(",");
 // 	iIndex=0;
 // 
 // 	while (std::getline(Openfile, strline))
@@ -609,7 +629,7 @@ USHORT CChroma_API_V2::LoadPortDifference(CString szFilePath)
 // 		iCount=0;
 // 		while(iIndex<csReadLine.GetLength())
 // 		{
-// 			CStringA csTok=csReadLine.Tokenize(Symbol,iIndex);
+// 			QStringA csTok=csReadLine.Tokenize(Symbol,iIndex);
 // 			csData[iCount++]=csTok.Trim("\t\n ");		
 // 		}
 // 		double fTemp;

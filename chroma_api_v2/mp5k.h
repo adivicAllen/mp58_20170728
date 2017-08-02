@@ -1,6 +1,7 @@
 // define MP5k class
 #ifndef _MP5K_H_
 #define _MP5K_H_
+#include <QLibrary>
 /*
 #ifdef _WINDLL
 	#define ADIVIC_TCLIENT_API __declspec(dllexport)
@@ -49,7 +50,7 @@ typedef UINT (*mp5k_GPS_CW_Signal)		( const UINT& handle );
 
 
 typedef struct{
-    HINSTANCE               mp5kLib;
+    QLibrary             mp5kLib;
     mp5k_init               mp5kInit;
     mp5k_add                mp5kAdd;
     mp5k_delete             mp5kDelete;
