@@ -1,12 +1,13 @@
 // define MP5k class
 #ifndef _MP5K_H_
 #define _MP5K_H_
-
+/*
 #ifdef _WINDLL
 	#define ADIVIC_TCLIENT_API __declspec(dllexport)
 #else
 	#define ADIVIC_TCLIENT_API __declspec(dllimport)
 #endif
+*/
 #include "mp5k_define.h"
 
 typedef UINT (*mp5k_init)				(void);

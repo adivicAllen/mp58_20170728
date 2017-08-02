@@ -1,7 +1,8 @@
 #ifndef _DEFINE_H_
 #define _DEFINE_H_
-#include <Windows.h>
+//#include <Windows.h>
 #include <vector>
+#include "types.h"
 
 #define DUTLOG 1
 #define MP5KLOG 1

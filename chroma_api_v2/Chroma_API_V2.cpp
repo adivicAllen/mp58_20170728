@@ -1,15 +1,15 @@
-
+#include <QString>
 #include "Chroma_API_V2.h"
 #define MAX_STRING_LEN			1014
 #define  DEFAULT_ERROR 9999
 //CChroma_API_V2 theAPP; //****The Only one, don't delete.**** 
- 
+
 CChroma_API_V2 MultiAPP[MaxInstr];
 
 // This is the constructor of a class that has been exported.
 // see Chroma_API_V2.h for the class definition
 bool CChroma_API_V2::s_bIsOpenProfile=false;
-CString CChroma_API_V2::s_szConfigFilePath="";
+CString  CChroma_API_V2::s_szConfigFilePath="";
 bool CChroma_API_V2::s_bIsServer_Connected[]={false,false};
 bool CChroma_API_V2::s_bIsServer_OnOff[]={false,false};
 CString CChroma_API_V2::s_szServer_IP[]={"",""};
@@ -252,7 +252,8 @@ void CChroma_API_V2::CurrentFilePath(char * chFileDir)
 {
 	char szCurrentDir[255];
 	//WIN32_FIND_DATAA FindFileData;
-	HANDLE	hFind=INVALID_HANDLE_VALUE;
+    //HANDLE	hFind=INVALID_HANDLE_VALUE;
+    HANDLE	hFind =  NULL;
 	string strFileDir="",strFileName="";
 	CString csFileName="";
 	bool bIsFind=false;

@@ -1,7 +1,7 @@
 #ifndef  MP5800_API_DEFINE_H
 #define  MP5800_API_DEFINE_H
-#include <Windows.h>
- 
+//#include <Windows.h>
+#include "types.h"
 namespace MP5800{
 #include "MP5800_API_const.h"
 #include "MP5800_Measure_Item.h"

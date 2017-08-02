@@ -2,9 +2,9 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <Windows.h>
-#include <atlstr.h>
-#include <WinBase.h>
+// #include <Windows.h>
+// #include <atlstr.h>
+// #include <WinBase.h>
 #include <math.h>
 #include <vector>
 #include "Dll_Common.h"

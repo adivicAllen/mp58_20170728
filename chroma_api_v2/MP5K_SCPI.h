@@ -2,7 +2,7 @@
 #define MP5K_SCPI_H
 
 #include "ADIVIC_Sync_TelnetClient.h"
-#include "D:\\DSPXXX_API\\Chroma_API_V2\\MP5800_API_define.h"
+#include "MP5800_API_define.h"
 //#include "AdivicTClient.h"
 //#include "AdivicSocket.h"
 #include <string>
@@ -10,12 +10,12 @@ using namespace std;
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <Windows.h>
-#include <atlstr.h>
-#include <WinBase.h>
+// #include <Windows.h>
+// #include <atlstr.h>
+// #include <WinBase.h>
 #include <math.h>
 #include <vector>
-
+#include "types.h"
 //------SCPI Read Setting
 #define WaitSegTime 50
 // #define WaitTimesMAX 30 // time out of read , modify from 200 -> 500 -> 1500 

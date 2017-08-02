@@ -1,9 +1,10 @@
 #pragma once
-
+#include <QtCore/qglobal.h>
+//#include "chroma_api_v2_global.h"
 #ifdef _CHROMA_API_EXPORTS_LIB
-#define CHROMA_API_DLLEXT  extern "C"  __declspec(dllexport)
+#define CHROMA_API_DLLEXT  extern "C"  Q_DECL_EXPORT
 #else
-#define CHROMA_API_DLLEXT  extern "C" __declspec(dllimport)
+#define CHROMA_API_DLLEXT  extern "C" Q_DECL_IMPORT
 #endif
 
 #include "MP5800_API_define.h"
@@ -62,102 +63,102 @@ enum VSA_TRIGGER_TYPE
  
 
 // system function for TCP?IP
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_CloseAllServer();
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_CloseServer(RF_PORT PortIndex);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_ConnectSever(RF_PORT PortIndex,const char * HostAddress, const char * Port,unsigned int uiTimeout=15);
-CHROMA_API_DLLEXT const char* __stdcall expMV2_GetLastErrorMessage();
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_InitFunction(const char *IniFilePath);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetDisplayOnOffByConnection( bool bDebugMode);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetSeverIsConnect(RF_PORT PortIndex,bool &bIsConnect);//
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_UploadWaveform(const char *WaveformFilePath);//
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_PresetServer(RF_PORT PortIndex);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_OpenServer();//
+CHROMA_API_DLLEXT USHORT   expMV2_CloseAllServer();
+CHROMA_API_DLLEXT USHORT expMV2_CloseServer(RF_PORT PortIndex);
+CHROMA_API_DLLEXT USHORT expMV2_ConnectSever(RF_PORT PortIndex,const char * HostAddress, const char * Port,unsigned int uiTimeout=15);
+CHROMA_API_DLLEXT const char* expMV2_GetLastErrorMessage();
+CHROMA_API_DLLEXT USHORT expMV2_InitFunction(const char *IniFilePath);
+CHROMA_API_DLLEXT USHORT expMV2_SetDisplayOnOffByConnection( bool bDebugMode);
+CHROMA_API_DLLEXT USHORT expMV2_GetSeverIsConnect(RF_PORT PortIndex,bool &bIsConnect);//
+CHROMA_API_DLLEXT USHORT expMV2_UploadWaveform(const char *WaveformFilePath);//
+CHROMA_API_DLLEXT USHORT expMV2_PresetServer(RF_PORT PortIndex);
+CHROMA_API_DLLEXT USHORT expMV2_OpenServer();//
 
 
 // MP5800 port setting, calbe loss, standard setting
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetCurrentFreqLoss(const double fFreq,const RF_PORT PortIndex,double& fTxLoss,double& fRxLoss);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_InputCableLoss(RF_PORT PortIndex,const char *InstrCableLossFilePath);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetCableLossEnable(RF_PORT PortIndex,const bool bEnable);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetCableLossTableCoupleMode(RF_PORT PortIndex, const bool bOnOff);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetDistributionModeOnOff(RF_PORT PortIndex,const bool bOnOff);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetDistributionModeOnOff(RF_PORT PortIndex,bool &bDistributionMode);
+CHROMA_API_DLLEXT USHORT expMV2_GetCurrentFreqLoss(const double fFreq,const RF_PORT PortIndex,double& fTxLoss,double& fRxLoss);
+CHROMA_API_DLLEXT USHORT expMV2_InputCableLoss(RF_PORT PortIndex,const char *InstrCableLossFilePath);
+CHROMA_API_DLLEXT USHORT expMV2_SetCableLossEnable(RF_PORT PortIndex,const bool bEnable);
+CHROMA_API_DLLEXT USHORT expMV2_SetCableLossTableCoupleMode(RF_PORT PortIndex, const bool bOnOff);
+CHROMA_API_DLLEXT USHORT expMV2_SetDistributionModeOnOff(RF_PORT PortIndex,const bool bOnOff);
+CHROMA_API_DLLEXT USHORT expMV2_GetDistributionModeOnOff(RF_PORT PortIndex,bool &bDistributionMode);
 
 
 // MP5800 port setting, calbe loss, standard setting
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_Set_4Port_Switch(const RF_PORT PortFirstIndex,const PORT_MODE pm_PORT_1,
+CHROMA_API_DLLEXT USHORT expMV2_Set_4Port_Switch(const RF_PORT PortFirstIndex,const PORT_MODE pm_PORT_1,
 																							const PORT_MODE pm_Port_2, 
 																							const PORT_MODE pm_Port_3,
 																							const PORT_MODE pm_Port_4);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetMeasureMode( RF_PORT PortIndex, const MP5800_STANDARD  standard );
+CHROMA_API_DLLEXT USHORT expMV2_SetMeasureMode( RF_PORT PortIndex, const MP5800_STANDARD  standard );
 
 
 // set vSA
 
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_PowerReferenceAuto(RF_PORT PortIndex);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetCenterFrequency(RF_PORT PortIndex,const double fFreqMHz,const double fFreqOffsetMHz=0); //50~6000 MHz
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetFilterWindow(RF_PORT PortIndex, const UINT filterType);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetFreqSpan(RF_PORT PortIndex,const int iFreqSpanMHz);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SaveVsaData(RF_PORT PortIndex,const char *SaveName);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetRxRBW(RF_PORT PortIndex,const RBW uiEnum);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetRxRBW_Int(RF_PORT PortIndex,const int iIndex);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetRxReferenceLevel(RF_PORT PortIndex,const double fRefLevel);//10~-80 dBm
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetSpectrumOnOff(RF_PORT PortIndex, const bool bOnOff);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetVsaOnOff(RF_PORT PortIndex,const bool bOnOff);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetVsaRx_Port(const RF_PORT PortIndex);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetVsaTriggerType(RF_PORT PortIndex,const MP5800_VSA_Trigger_Type uiTriggerType);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetVsaTriggerTimeOut( RF_PORT PortIndex,const double dTriggerTimeOut_ms );
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetVsaCaptureLength( RF_PORT PortIndex,const double dCapturetureLength_ms );
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetVsaGapTime(RF_PORT PortIndex,const double dGapTime_us);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetVsaTriggerOffsetUs(RF_PORT PortIndex,const int OffsetUs);
+CHROMA_API_DLLEXT USHORT expMV2_PowerReferenceAuto(RF_PORT PortIndex);
+CHROMA_API_DLLEXT USHORT expMV2_SetCenterFrequency(RF_PORT PortIndex,const double fFreqMHz,const double fFreqOffsetMHz=0); //50~6000 MHz
+CHROMA_API_DLLEXT USHORT expMV2_SetFilterWindow(RF_PORT PortIndex, const UINT filterType);
+CHROMA_API_DLLEXT USHORT expMV2_SetFreqSpan(RF_PORT PortIndex,const int iFreqSpanMHz);
+CHROMA_API_DLLEXT USHORT expMV2_SaveVsaData(RF_PORT PortIndex,const char *SaveName);
+CHROMA_API_DLLEXT USHORT expMV2_SetRxRBW(RF_PORT PortIndex,const RBW uiEnum);
+CHROMA_API_DLLEXT USHORT expMV2_SetRxRBW_Int(RF_PORT PortIndex,const int iIndex);
+CHROMA_API_DLLEXT USHORT expMV2_SetRxReferenceLevel(RF_PORT PortIndex,const double fRefLevel);//10~-80 dBm
+CHROMA_API_DLLEXT USHORT expMV2_SetSpectrumOnOff(RF_PORT PortIndex, const bool bOnOff);
+CHROMA_API_DLLEXT USHORT expMV2_SetVsaOnOff(RF_PORT PortIndex,const bool bOnOff);
+CHROMA_API_DLLEXT USHORT expMV2_SetVsaRx_Port(const RF_PORT PortIndex);
+CHROMA_API_DLLEXT USHORT expMV2_SetVsaTriggerType(RF_PORT PortIndex,const MP5800_VSA_Trigger_Type uiTriggerType);
+CHROMA_API_DLLEXT USHORT expMV2_SetVsaTriggerTimeOut( RF_PORT PortIndex,const double dTriggerTimeOut_ms );
+CHROMA_API_DLLEXT USHORT expMV2_SetVsaCaptureLength( RF_PORT PortIndex,const double dCapturetureLength_ms );
+CHROMA_API_DLLEXT USHORT expMV2_SetVsaGapTime(RF_PORT PortIndex,const double dGapTime_us);
+CHROMA_API_DLLEXT USHORT expMV2_SetVsaTriggerOffsetUs(RF_PORT PortIndex,const int OffsetUs);
 // get valuse of VSA 
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetCenterFrequency(RF_PORT PortIndex,double &fFreqMHz);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetFreqSpan(RF_PORT PortIndex,int &iFreqSpanMHz);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetRxRBW(RF_PORT PortIndex,UINT64 &uiRBW_Hz);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetRxReferenceLevel(RF_PORT PortIndex,double &fRefLevel);
+CHROMA_API_DLLEXT USHORT expMV2_GetCenterFrequency(RF_PORT PortIndex,double &fFreqMHz);
+CHROMA_API_DLLEXT USHORT expMV2_GetFreqSpan(RF_PORT PortIndex,int &iFreqSpanMHz);
+CHROMA_API_DLLEXT USHORT expMV2_GetRxRBW(RF_PORT PortIndex,UINT64 &uiRBW_Hz);
+CHROMA_API_DLLEXT USHORT expMV2_GetRxReferenceLevel(RF_PORT PortIndex,double &fRefLevel);
 
 
 
 // vsa measure power API
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_ClearMark(RF_PORT PortIndex);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetChannelPower(RF_PORT PortIndex,double &fChannelPower);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetChannelPower2Span(RF_PORT PortIndex,const double fMarkFreqMHz, const double leftSpan_Hz, const double rightSpan_Hz, 
+CHROMA_API_DLLEXT USHORT expMV2_ClearMark(RF_PORT PortIndex);
+CHROMA_API_DLLEXT USHORT expMV2_GetChannelPower(RF_PORT PortIndex,double &fChannelPower);
+CHROMA_API_DLLEXT USHORT expMV2_GetChannelPower2Span(RF_PORT PortIndex,const double fMarkFreqMHz, const double leftSpan_Hz, const double rightSpan_Hz,
 	double &PowerMeasured, double &PowerMeasured_Left, double &PowerMeasured_Right );
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetCWChannelPower(RF_PORT PortIndex,const double fMarkFreqMHz, const double leftSpan_Hz, const double rightSpan_Hz, 
+CHROMA_API_DLLEXT USHORT expMV2_GetCWChannelPower(RF_PORT PortIndex,const double fMarkFreqMHz, const double leftSpan_Hz, const double rightSpan_Hz,
 	double &PowerMeasured, double &PowerMeasured_Left, double &PowerMeasured_Right, double &Power_Comp, double &Frequency_Offset );
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetMarkValue(RF_PORT PortIndex,double &fMarkValue);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetPeakData(RF_PORT PortIndex,double &fPeakFreqMHz,double &fPeakPower);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetPowerByTime(RF_PORT PortIndex,double &dPowerByTime);       // 20161202
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetPeakPowerFrequencyHzByTime(RF_PORT PortIndex,double &dPeakPowerFrequencyHzByTime);  // 20161202
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetDigitalDownConvertor(RF_PORT PortIndex,const bool bOnOff, \
+CHROMA_API_DLLEXT USHORT expMV2_GetMarkValue(RF_PORT PortIndex,double &fMarkValue);
+CHROMA_API_DLLEXT USHORT expMV2_GetPeakData(RF_PORT PortIndex,double &fPeakFreqMHz,double &fPeakPower);
+CHROMA_API_DLLEXT USHORT expMV2_GetPowerByTime(RF_PORT PortIndex,double &dPowerByTime);       // 20161202
+CHROMA_API_DLLEXT USHORT expMV2_GetPeakPowerFrequencyHzByTime(RF_PORT PortIndex,double &dPeakPowerFrequencyHzByTime);  // 20161202
+CHROMA_API_DLLEXT USHORT expMV2_SetDigitalDownConvertor(RF_PORT PortIndex,const bool bOnOff, \
 	                               const double offSet_Hz =1000000 );
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetMark(RF_PORT PortIndex,const double fMarkFreqMHz);
+CHROMA_API_DLLEXT USHORT expMV2_SetMark(RF_PORT PortIndex,const double fMarkFreqMHz);
 
 
 // set VSG value
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_LoadMemory(RF_PORT PortIndex,const char * strFileName);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_LoadMemoryWithFilePath(RF_PORT PortIndex,const char * strFileName, const char *strFilePath);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_ModulationOnOff(RF_PORT PortIndex,const bool bModulationOnOff);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_Rf_OnOff(RF_PORT PortIndex,const bool bRfOnOff);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetCWFrequencyOffset(RF_PORT PortIndex,const double fFreqOffsetMHz); //-50~50MHz
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetTxOutputLevel(RF_PORT PortIndex,const double fOutputLevel);//10~-90 dBm
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_TxPlayRepeatOnOff(RF_PORT PortIndex,const bool bOnOff);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetVsgPlayCount(RF_PORT PortIndex,const int count);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetVsgPlayGapUs(RF_PORT PortIndex,const UINT GapUs);
+CHROMA_API_DLLEXT USHORT expMV2_LoadMemory(RF_PORT PortIndex,const char * strFileName);
+CHROMA_API_DLLEXT USHORT expMV2_LoadMemoryWithFilePath(RF_PORT PortIndex,const char * strFileName, const char *strFilePath);
+CHROMA_API_DLLEXT USHORT expMV2_ModulationOnOff(RF_PORT PortIndex,const bool bModulationOnOff);
+CHROMA_API_DLLEXT USHORT expMV2_Rf_OnOff(RF_PORT PortIndex,const bool bRfOnOff);
+CHROMA_API_DLLEXT USHORT expMV2_SetCWFrequencyOffset(RF_PORT PortIndex,const double fFreqOffsetMHz); //-50~50MHz
+CHROMA_API_DLLEXT USHORT expMV2_SetTxOutputLevel(RF_PORT PortIndex,const double fOutputLevel);//10~-90 dBm
+CHROMA_API_DLLEXT USHORT expMV2_TxPlayRepeatOnOff(RF_PORT PortIndex,const bool bOnOff);
+CHROMA_API_DLLEXT USHORT expMV2_SetVsgPlayCount(RF_PORT PortIndex,const int count);
+CHROMA_API_DLLEXT USHORT expMV2_SetVsgPlayGapUs(RF_PORT PortIndex,const UINT GapUs);
 
 
 // get value from VSG
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_Get_Rf_OnOff(RF_PORT PortIndex,bool& bRfOnOff);
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetTxOutputLevel(RF_PORT PortIndex,double &fOutputLevel);
+CHROMA_API_DLLEXT USHORT expMV2_Get_Rf_OnOff(RF_PORT PortIndex,bool& bRfOnOff);
+CHROMA_API_DLLEXT USHORT expMV2_GetTxOutputLevel(RF_PORT PortIndex,double &fOutputLevel);
 
 
 
 
 // modulatiion
 
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_Set_GPRF_DemodulationType( const RF_PORT PortIndex, const MP5800_GPRF_Demodulation& demodualtion);
+CHROMA_API_DLLEXT USHORT expMV2_Set_GPRF_DemodulationType( const RF_PORT PortIndex, const MP5800_GPRF_Demodulation& demodualtion);
  
 
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetFskDemodulation(const RF_PORT PortIndex,   \
+CHROMA_API_DLLEXT USHORT expMV2_SetFskDemodulation(const RF_PORT PortIndex,   \
 	                                                         const USHORT usSolution = 0,         \
 											                 const USHORT usFilerType = 3,        \
 															 const USHORT usCountinuity = 0,      \
@@ -169,13 +170,13 @@ CHROMA_API_DLLEXT USHORT __stdcall expMV2_SetFskDemodulation(const RF_PORT PortI
  
 
 
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetFSK_FreqDeviation(RF_PORT PortIndex,double &fFreqDevMHz);
+CHROMA_API_DLLEXT USHORT expMV2_GetFSK_FreqDeviation(RF_PORT PortIndex,double &fFreqDevMHz);
 
-CHROMA_API_DLLEXT USHORT __stdcall expMV2_GetFSKDemodulation(RF_PORT PortIndex,double &dFreqDevMHz,double &dFreqOffset,double &dFreqDrift,double &DevError,double &FskError);
+CHROMA_API_DLLEXT USHORT expMV2_GetFSKDemodulation(RF_PORT PortIndex,double &dFreqDevMHz,double &dFreqOffset,double &dFreqDrift,double &DevError,double &FskError);
  
 
 
-CHROMA_API_DLLEXT UINT __stdcall expMV2_Set_WIFI_RX( 
+CHROMA_API_DLLEXT UINT expMV2_Set_WIFI_RX(
 	                                                    const RF_PORT            PortIndex   = MP5800::RF_PORT_1   ,                  \
 														const UINT                           frequency_MHz  = 5180,                   \
 														const double                    referenceLevel_dBm  = -10.0,                   \
@@ -186,7 +187,7 @@ CHROMA_API_DLLEXT UINT __stdcall expMV2_Set_WIFI_RX(
 														const bool                             isBeamforming = false );  
 
 
-CHROMA_API_DLLEXT UINT __stdcall expMV2_Set_WIFI_BT_RX_Advance(
+CHROMA_API_DLLEXT UINT expMV2_Set_WIFI_BT_RX_Advance(
 	                                                        const RF_PORT                    PortIndex = MP5800::RF_PORT_1  , 
 	                                                        const WIFI_BT_TRIGGER_TYPE                  wifiBT_TriggerType   = WIFI_BT_TRIGGER_POSTIVE          , \
 	                                                        const double                              wifiBT_TriggerGapTime_ms = 0.00001              , \
@@ -196,7 +197,7 @@ CHROMA_API_DLLEXT UINT __stdcall expMV2_Set_WIFI_BT_RX_Advance(
 														    const WIFI_CHANNEL_ESTIMATION           wifiChannelEstimation = DATA_ESTIMATION  );
 
 /*
-CHROMA_API_DLLEXT UINT __stdcall expMV2_Get_WIFI_RX(  
+CHROMA_API_DLLEXT UINT expMV2_Get_WIFI_RX(
 	                                                    const RF_PORT    PortIndex    ,             \
                                                         double         &TXPowerdBm,               \
 														double         &EVM,                      \
@@ -210,7 +211,7 @@ CHROMA_API_DLLEXT UINT __stdcall expMV2_Get_WIFI_RX(
 													   bool             &isBFON,                  \
 													   double           &PreamblePower            );
 */
-CHROMA_API_DLLEXT UINT __stdcall expMV2_Get_WIFI_RX(  
+CHROMA_API_DLLEXT UINT expMV2_Get_WIFI_RX(
 	                                                    const RF_PORT    PortIndex    ,             \
                                                         double         &TXPowerdBm,               \
 														double         &EVM,                      \
@@ -221,7 +222,7 @@ CHROMA_API_DLLEXT UINT __stdcall expMV2_Get_WIFI_RX(
 													   double           &LoLeakage );
  
 
-CHROMA_API_DLLEXT UINT  __stdcall expMV2_Set_WIFI_TX(
+CHROMA_API_DLLEXT UINT  expMV2_Set_WIFI_TX(
 	                                                    const RF_PORT                 PortIndex   = MP5800::RF_PORT_1   ,          \
                                                         const UINT                    frequency_MHz  = 5180,               \
 														 const double                    outPower_dBm  = -10.00  ,         \
@@ -231,7 +232,7 @@ CHROMA_API_DLLEXT UINT  __stdcall expMV2_Set_WIFI_TX(
 														const WIFI_DATA_RATE                 wifiDataRate  = MCS7              );
 
 
-CHROMA_API_DLLEXT UINT __stdcall expMV2_Set_WIFI_TX_Start(
+CHROMA_API_DLLEXT UINT expMV2_Set_WIFI_TX_Start(
 	                                                          const RF_PORT                 PortIndex   = MP5800::RF_PORT_1,
 															  const bool                    OnOff = true);
 
@@ -286,7 +287,7 @@ enum BT_PACKET_TYPE
  
  */
 
-CHROMA_API_DLLEXT UINT __stdcall expMV2_Set_BT_RX( 
+CHROMA_API_DLLEXT UINT expMV2_Set_BT_RX(
 	                                                    const RF_PORT                    PortIndex   = MP5800::RF_PORT_1   ,                     \
 														const UINT                           frequency_MHz  = 2402,                   \
 														const double                    referenceLevel_dBm  = -10.0,                   \
@@ -295,7 +296,7 @@ CHROMA_API_DLLEXT UINT __stdcall expMV2_Set_BT_RX(
 
 
 
-CHROMA_API_DLLEXT UINT __stdcall expMV2_Get_BT_RX(  
+CHROMA_API_DLLEXT UINT expMV2_Get_BT_RX(
 	                                                    const RF_PORT  PortIndex    ,                    \
                                                         double         &targetPower,                     \
 														double         &initialFrequencyError,           \
@@ -313,7 +314,7 @@ CHROMA_API_DLLEXT UINT __stdcall expMV2_Get_BT_RX(
 
  
 
-CHROMA_API_DLLEXT UINT  __stdcall expMV2_Set_BT_TX(
+CHROMA_API_DLLEXT UINT  expMV2_Set_BT_TX(
 	                                                    const RF_PORT                 PortIndex   = MP5800::RF_PORT_1   ,          \
                                                         const UINT                    frequency_MHz  = 2402,               \
 														 const double                  outPower_dBm  = -60.00  ,         \
@@ -321,7 +322,7 @@ CHROMA_API_DLLEXT UINT  __stdcall expMV2_Set_BT_TX(
 														 const  UINT			        bitCount = 160,                   \
 														 const BT_PACKET_TYPE           btPacketType   =  DH1   );
 
-CHROMA_API_DLLEXT UINT __stdcall expMV2_Set_BT_TX_Start(
+CHROMA_API_DLLEXT UINT expMV2_Set_BT_TX_Start(
 	                                                          const RF_PORT                 PortIndex   = MP5800::RF_PORT_1 ,
 															  const bool  OnOff = true);
 
