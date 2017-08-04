@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include <map>
 #include <iostream>
 #include <fstream> 
@@ -266,7 +266,7 @@ UINT initSub()
 /* ---------------------------------------------------------------------------
 **	MP5800 Connection
 ** ------------------------------------------------------------------------- */
-MP5800_API  UINT __stdcall  MP5800_connect( const char *IniFilePath , const bool bDisplay , const bool bDebugMode)
+MP5800_API  UINT   MP5800_connect( const char *IniFilePath , const bool bDisplay , const bool bDebugMode)
 {
     
 	UINT failure = MP5800_ERROR ;
@@ -294,7 +294,7 @@ MP5800_API  UINT __stdcall  MP5800_connect( const char *IniFilePath , const bool
 
 // ----------------------------------------------------------------------------
 
-MP5800_API  UINT __stdcall MP5800_disconnect( void ) 
+MP5800_API  UINT  MP5800_disconnect( void )
 {
 	UINT result = MP5800_ERROR;
 	result =  expMV2_CloseAllServer();
@@ -312,7 +312,7 @@ MP5800_API  UINT __stdcall MP5800_disconnect( void )
 **	MP5800 spectrum on off cotrol
 ** ------------------------------------------------------------------------- */
 
-MP5800_API  UINT __stdcall  MP5800_setSpectrumOnOff( const RF_PORT PortIndex, const MP5800_SWITCH OnOff )
+MP5800_API  UINT   MP5800_setSpectrumOnOff( const RF_PORT PortIndex, const MP5800_SWITCH OnOff )
 {
 	UINT failure = MP5800_ERROR;
     failure = expMV2_SetSpectrumOnOff(PortIndex, OnOff?true:false);
@@ -325,7 +325,7 @@ MP5800_API  UINT __stdcall  MP5800_setSpectrumOnOff( const RF_PORT PortIndex, co
 	
 }
 // --------------------------------------------------------------------------
-MP5800_API  UINT __stdcall MP5800_setCableLossOnOff ( const RF_PORT rfPort, const MP5800_SWITCH OnOff)
+MP5800_API  UINT  MP5800_setCableLossOnOff ( const RF_PORT rfPort, const MP5800_SWITCH OnOff)
 {
    UINT failure = MP5800_ERROR;
  
@@ -352,7 +352,7 @@ PORT_MODE  assingPortConfiguration( MP5800_SWITCH portConfig  )
     }
 }
 //---------------------------------------------------------------------------------------------
-MP5800_API  UINT __stdcall  MP5800_setPortConfiguration( const RF_PORT rfPort , const MP5800_CONFIG& config ) // tester API
+MP5800_API  UINT   MP5800_setPortConfiguration( const RF_PORT rfPort , const MP5800_CONFIG& config ) // tester API
 {
 	
 	UINT failure = MP5800_ERROR ;
@@ -383,7 +383,7 @@ MP5800_API  UINT __stdcall  MP5800_setPortConfiguration( const RF_PORT rfPort , 
 }
 
 // -----------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_setConfig( const RF_PORT rfPort ,	const MP5800_CONFIG&  config) // tester API
+MP5800_API UINT  MP5800_setConfig( const RF_PORT rfPort ,	const MP5800_CONFIG&  config) // tester API
 {
 	UINT failure = MP5800_ERROR ;
 	int index = mp5800Index(rfPort);
@@ -457,7 +457,7 @@ MP5800_API UINT __stdcall MP5800_setConfig( const RF_PORT rfPort ,	const MP5800_
 }
 
 // -------------------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_setMode( const RF_PORT rfPort ,const MP5800_STANDARD  standard) // tester API
+MP5800_API UINT  MP5800_setMode( const RF_PORT rfPort ,const MP5800_STANDARD  standard) // tester API
 {
 	UINT failure = MP5800_ERROR ;
 	int index = mp5800Index(rfPort);
@@ -472,7 +472,7 @@ MP5800_API UINT __stdcall MP5800_setMode( const RF_PORT rfPort ,const MP5800_STA
 }
 
 // ----------------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_loadWaveform( const RF_PORT rfPort, const char *waveFormFileName)  // tester API
+MP5800_API UINT  MP5800_loadWaveform( const RF_PORT rfPort, const char *waveFormFileName)  // tester API
 {
 	expMV2_LoadMemory(rfPort,waveFormFileName );
 	return MP5800_SUCCESS;
@@ -483,7 +483,7 @@ MP5800_API UINT __stdcall MP5800_loadWaveform( const RF_PORT rfPort, const char 
 ** ------------------------------------------------------------------------- */
  
 
-MP5800_API UINT __stdcall MP5800_setVSG( const RF_PORT rfPort ,  const MP5800_VSG_CONFIG& vsgConfig)	 // set tester API     
+MP5800_API UINT  MP5800_setVSG( const RF_PORT rfPort ,  const MP5800_VSG_CONFIG& vsgConfig)	 // set tester API
 {
 	
 	UINT failure = MP5800_ERROR ;
@@ -634,7 +634,7 @@ MP5800_API UINT __stdcall MP5800_setVSG( const RF_PORT rfPort ,  const MP5800_VS
 											   
 // ---------------------------------------------------------------------------
 
-MP5800_API UINT __stdcall MP5800_setVSG_Run( const RF_PORT rfPort, bool vsgOnOff )  // teser API, use port to control the 
+MP5800_API UINT  MP5800_setVSG_Run( const RF_PORT rfPort, bool vsgOnOff )  // teser API, use port to control the
 {
 	UINT failure = MP5800_ERROR ;
 	int index = mp5800Index(rfPort);
@@ -685,7 +685,7 @@ MP5800_API UINT __stdcall MP5800_setVSG_Run( const RF_PORT rfPort, bool vsgOnOff
     
 
 
-MP5800_API UINT __stdcall MP5800_setVSA( const RF_PORT rfPort,  const MP5800_VSA_CONFIG& vsaConfig)    // tester API
+MP5800_API UINT  MP5800_setVSA( const RF_PORT rfPort,  const MP5800_VSA_CONFIG& vsaConfig)    // tester API
 {
 
     UINT failure = MP5800_ERROR ;
@@ -839,7 +839,7 @@ MP5800_API UINT __stdcall MP5800_setVSA( const RF_PORT rfPort,  const MP5800_VSA
   
 // ---------------------------------------------------------------------------
 
-MP5800_API UINT __stdcall MP5800_getVSA_Value(const RF_PORT rfPort, MP5800_VSA_MEASURE& vsMeasure )  // port command
+MP5800_API UINT  MP5800_getVSA_Value(const RF_PORT rfPort, MP5800_VSA_MEASURE& vsMeasure )  // port command
 {
 	UINT failure = MP5800_ERROR ;
 	int index = mp5800Index(rfPort);
@@ -899,7 +899,7 @@ MP5800_API UINT __stdcall MP5800_getVSA_Value(const RF_PORT rfPort, MP5800_VSA_M
 // ----------------------------------------------------------------------------
 // FSK demodulation
 // ----------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_setFSK_VSA( const RF_PORT rfPort, const MP5800_FSK_CONFIG& fskConfig, const MP5800_VSA_CONFIG& vsaConfig)
+MP5800_API UINT  MP5800_setFSK_VSA( const RF_PORT rfPort, const MP5800_FSK_CONFIG& fskConfig, const MP5800_VSA_CONFIG& vsaConfig)
 {
 	UINT failure = MP5800_ERROR ;
 	int index = mp5800Index(rfPort);
@@ -961,7 +961,7 @@ MP5800_API UINT __stdcall MP5800_setFSK_VSA( const RF_PORT rfPort, const MP5800_
 
 
 // ----------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_getFSK_VSA_Value( const RF_PORT rfPort, MP5800_FSK_MEASURE& fskMeasure )
+MP5800_API UINT  MP5800_getFSK_VSA_Value( const RF_PORT rfPort, MP5800_FSK_MEASURE& fskMeasure )
 {
 	UINT failure = MP5800_ERROR;
 	int index = mp5800Index(rfPort);
@@ -1034,7 +1034,7 @@ MP5800_API UINT __stdcall MP5800_getFSK_VSA_Value( const RF_PORT rfPort, MP5800_
 // ---------------------------------------------------------------------------
 //  wifi  RX
 // ---------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_setWIFI_VSA( const RF_PORT rfPort, const MP5800_WIFI_CONFIG& wifiConfig  , const MP5800_VSA_CONFIG& vsaConfig)
+MP5800_API UINT  MP5800_setWIFI_VSA( const RF_PORT rfPort, const MP5800_WIFI_CONFIG& wifiConfig  , const MP5800_VSA_CONFIG& vsaConfig)
 {
 	UINT failure = MP5800_ERROR;
 	int index = mp5800Index(rfPort);
@@ -1130,7 +1130,7 @@ MP5800_API UINT __stdcall MP5800_setWIFI_VSA( const RF_PORT rfPort, const MP5800
 }
 
 // ---------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_getWIFI_VSA_Value(const RF_PORT  rfPort ,MP5800_WIFI_MEASURE& wifiMeasure)
+MP5800_API UINT  MP5800_getWIFI_VSA_Value(const RF_PORT  rfPort ,MP5800_WIFI_MEASURE& wifiMeasure)
 {
 	UINT failure = MP5800_ERROR;
 	int index = mp5800Index(rfPort);
@@ -1199,7 +1199,7 @@ MP5800_API UINT __stdcall MP5800_getWIFI_VSA_Value(const RF_PORT  rfPort ,MP5800
 // ---------------------------------------------------------------------------
 //  wifi  TX
 // ---------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_setWIFI_VSG( const RF_PORT rfPort, const MP5800_WIFI_CONFIG& wifiConfig , const MP5800_VSG_CONFIG& vsgConfig)
+MP5800_API UINT  MP5800_setWIFI_VSG( const RF_PORT rfPort, const MP5800_WIFI_CONFIG& wifiConfig , const MP5800_VSG_CONFIG& vsgConfig)
 {
 	 
 	UINT failure = MP5800_ERROR;
@@ -1260,7 +1260,7 @@ MP5800_API UINT __stdcall MP5800_setWIFI_VSG( const RF_PORT rfPort, const MP5800
 	   
 }
 // ---------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_setWIFI_VSG_Run(  const RF_PORT rfPort, const bool OnOff )
+MP5800_API UINT  MP5800_setWIFI_VSG_Run(  const RF_PORT rfPort, const bool OnOff )
 {
 	UINT failure = MP5800_ERROR;
 	int index = mp5800Index(rfPort);
@@ -1305,7 +1305,7 @@ MP5800_API UINT __stdcall MP5800_setWIFI_VSG_Run(  const RF_PORT rfPort, const b
 // ---------------------------------------------------------------------------
 //  BT RX
 // ---------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_setBT_VSA( const RF_PORT rfPort, const MP5800_BT_CONFIG& btConfig, const MP5800_VSA_CONFIG& vsaConfig)
+MP5800_API UINT  MP5800_setBT_VSA( const RF_PORT rfPort, const MP5800_BT_CONFIG& btConfig, const MP5800_VSA_CONFIG& vsaConfig)
 {
  
 UINT failure = MP5800_ERROR ;
@@ -1352,7 +1352,7 @@ if ( ( bDebug) || ( bInit) || ( mp5800TesterConfigStandard[index] !=   BLUETOOTH
 
 }
 
-MP5800_API UINT __stdcall MP5800_getBT_VSA_Value(const RF_PORT rfPort , MP5800_BT_MEASURE& btMeasure)
+MP5800_API UINT  MP5800_getBT_VSA_Value(const RF_PORT rfPort , MP5800_BT_MEASURE& btMeasure)
 {
  
 	UINT failure = MP5800_ERROR ;
@@ -1396,7 +1396,7 @@ MP5800_API UINT __stdcall MP5800_getBT_VSA_Value(const RF_PORT rfPort , MP5800_B
 //  BT TX
 // ---------------------------------------------------------------------------
 
-MP5800_API UINT __stdcall MP5800_setBT_VSG( const RF_PORT rfPort, const MP5800_BT_CONFIG& btConfig, const MP5800_VSG_CONFIG& vsgConfig)
+MP5800_API UINT  MP5800_setBT_VSG( const RF_PORT rfPort, const MP5800_BT_CONFIG& btConfig, const MP5800_VSG_CONFIG& vsgConfig)
 {
  
 UINT failure = MP5800_ERROR ;
@@ -1442,7 +1442,7 @@ int index = mp5800Index(rfPort);
 }
 
 // ------------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_setBT_VSG_Run(  const RF_PORT rfPort , const bool OnOff )
+MP5800_API UINT  MP5800_setBT_VSG_Run(  const RF_PORT rfPort , const bool OnOff )
  {
 UINT failure = MP5800_ERROR;
  
@@ -1482,7 +1482,7 @@ if ( ( bDebug) || ( bInit) || ( mp5800TesterConfigStandard[index] !=   BLUETOOTH
 
 // ---------------------------------------------------------------------------------------------------
 
-MP5800_API UINT __stdcall MP5800_saveVSA_WaveformToFile( const RF_PORT rfPort, const char *waveformFileName)
+MP5800_API UINT  MP5800_saveVSA_WaveformToFile( const RF_PORT rfPort, const char *waveformFileName)
 {
 	UINT result = MP5800_ERROR;
 	result = expMV2_SaveVsaData( rfPort, waveformFileName );
@@ -1495,7 +1495,7 @@ MP5800_API UINT __stdcall MP5800_saveVSA_WaveformToFile( const RF_PORT rfPort, c
 
 
 // customized table --------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_createTable( int tableIndex  )
+MP5800_API UINT  MP5800_createTable( int tableIndex  )
 {
 	std::vector<int>::iterator  it;
 	it = find ( mp5800TableIndex.begin(), mp5800TableIndex.end(), tableIndex );
@@ -1511,7 +1511,7 @@ MP5800_API UINT __stdcall MP5800_createTable( int tableIndex  )
 }
 
 // ---------------------------------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_addMeasureItemToTable( int tableIndex , MEASURE_ITEM measureItem )
+MP5800_API UINT  MP5800_addMeasureItemToTable( int tableIndex , MEASURE_ITEM measureItem )
 {
 	//1. find table index
 	std::vector<int>::iterator  indexIt;
@@ -1535,7 +1535,7 @@ MP5800_API UINT __stdcall MP5800_addMeasureItemToTable( int tableIndex , MEASURE
 	
 }
 // ------------------------------------------------------------------------------------------------------
-MP5800_API UINT __stdcall MP5800_getTable( const RF_PORT rfPort, int tableIndex )
+MP5800_API UINT  MP5800_getTable( const RF_PORT rfPort, int tableIndex )
 {
 	UINT failure = MP5800_ERROR ;
 	int index = mp5800Index(rfPort);
@@ -1894,7 +1894,7 @@ MP5800_API UINT __stdcall MP5800_getTable( const RF_PORT rfPort, int tableIndex 
 
 
 
-MP5800_API UINT __stdcall MP5800_getMeasureItemFromTable( int tableIndex , MEASURE_ITEM measureItem , double &measureValue )
+MP5800_API UINT  MP5800_getMeasureItemFromTable( int tableIndex , MEASURE_ITEM measureItem , double &measureValue )
 {
  
 		measureValue = mp5800Table[tableIndex][measureItem];

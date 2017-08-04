@@ -2,6 +2,9 @@
 #define TYPES_H
 #include <QtGlobal>
 #include <unistd.h>
+#define sprintf_s sprintf   // allenm  201707234
+#define strcpy_s  strcpy
+#define sscanf_s  sscanf
 typedef void *          HANDLE;
 typedef unsigned long   DWORD;
 //typedef unsigned int   DWORD;
@@ -13,6 +16,7 @@ typedef unsigned int    UINT;
 
 typedef unsigned short   USHORT;
 typedef unsigned long long       UINT64;
+typedef  long long       INT64;
 
 void Sleep(int sleepTime);
 

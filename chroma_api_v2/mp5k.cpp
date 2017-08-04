@@ -1,6 +1,6 @@
-// #include "stdafx.h"
-#include "mp5k.h"
 
+#include "mp5k.h"
+#include <QDebug>
 
 mp5k::mp5k(void)
 {
@@ -14,42 +14,51 @@ mp5k::~mp5k(void)
 
 bool mp5k::LoadDll(void)
 {
-	api.mp5kLib = LoadLibrary(L"mp5k.dll");
-	if (!api.mp5kLib)
+    if ( !QLibrary::isLibrary("mp5k.so") )
+    {
+        qDebug() << "uuirtdrv does not exist.";
+    }
+
+    api.mp5kLib.setFileName("mp5k.so");
+
+    if (api.mp5kLib.load())
 	{
 		return false;
 	}
-	
-	HINSTANCE Mp5kLib = api.mp5kLib;
-	api.mp5kInit				= ( mp5k_init)GetProcAddress(Mp5kLib,"mp5k_init");
-	api.mp5kAdd					= ( mp5k_add)GetProcAddress(Mp5kLib,"mp5k_add");
-	api.mp5kDelete				= ( mp5k_delete)GetProcAddress(Mp5kLib,"mp5k_delete");
-	api.mp5kTriggerSetting		= ( mp5k_trigger_setting)GetProcAddress(Mp5kLib,"mp5k_trigger_setting");
-	api.mp5kCorrectionSetting	= ( mp5k_correction_setting)GetProcAddress(Mp5kLib,"mp5k_correction_setting");
-	api.mp5kXtalTrimSetting		= ( mp5k_xtaltrim_setting)GetProcAddress(Mp5kLib,"mp5k_xtaltrim_setting");
-	api.mp5kXtalTrimGetOffset	= ( mp5k_xtaltrim_getoffset)GetProcAddress(Mp5kLib,"mp5k_xtaltrim_getoffset");
-	api.mp5kCalSetting			= ( mp5k_cal_setting)GetProcAddress(Mp5kLib,"mp5k_cal_setting");
-	api.mp5kCalMeas				= ( mp5k_cal_meas)GetProcAddress(Mp5kLib,"mp5k_cal_meas");
-	api.mp5kTXSetting			= ( mp5k_tx_setting)GetProcAddress(Mp5kLib,"mp5k_tx_setting");
-	api.mp5kTXMeas				= ( mp5k_tx_meas)GetProcAddress(Mp5kLib,"mp5k_tx_meas");
-	api.mp5kTxMeasExtend		= ( mp5k_tx_meas_extend )GetProcAddress(Mp5kLib,"mp5k_tx_meas_extend");
-	api.mp5kRXSetting			= ( mp5k_rx_setting)GetProcAddress(Mp5kLib,"mp5k_rx_setting");
-	api.mp5kRXStart				= ( mp5k_rx_start)GetProcAddress(Mp5kLib,"mp5k_rx_start");
-	api.mp5kBTtxsetting			= ( mp5k_BT_tx_setting )GetProcAddress(Mp5kLib,"mp5k_BT_tx_setting");
-	api.mp5kBTtxmeas			= ( mp5k_BT_tx_meas )GetProcAddress(Mp5kLib,"mp5k_BT_tx_meas");
-	api.mp5kBTtxmeasExt			= ( mp5k_BT_tx_meas_extend )GetProcAddress(Mp5kLib, "mp5k_BT_tx_meas_extend");
-	api.mp5kBTrxsetting			= ( mp5k_BT_rx_setting )GetProcAddress(Mp5kLib,"mp5k_BT_rx_setting");
-	api.mp5kBTrxstart			= ( mp5k_BT_rx_start )GetProcAddress(Mp5kLib,"mp5k_BT_rx_start");
-	api.mp5kClose				= ( mp5k_close )GetProcAddress(Mp5kLib,"mp5k_close");
 
-	api.mp5kGPSinit				= ( mp5k_GPS_init )GetProcAddress(Mp5kLib,"mp5k_GPS_init");
-	api.mp5kGPSadd				= ( mp5k_GPS_add )GetProcAddress(Mp5kLib,"mp5k_GPS_add");
-	api.mp5kGPSdelete			= ( mp5k_GPS_delete )GetProcAddress(Mp5kLib,"mp5k_GPS_delete");
-	api.mp5kGPSclose			= ( mp5k_GPS_close )GetProcAddress(Mp5kLib,"mp5k_GPS_close");
-	api.mp5kGPSSingleCh_Setting	= ( mp5k_GPS_SingleCh_Setting )GetProcAddress(Mp5kLib,"mp5k_GPS_SingleCh_Setting");
-	api.mp5kGPSSingleCh_Start	= ( mp5k_GPS_SingleCh_Start )GetProcAddress(Mp5kLib,"mp5k_GPS_SingleCh_Start");
-	api.mp5kGPSSingleCh_Stop	= ( mp5k_GPS_SingleCh_Stop )GetProcAddress(Mp5kLib,"mp5k_GPS_SingleCh_Stop");
-	api.mp5kGPSCW_Signal		= ( mp5k_GPS_CW_Signal )GetProcAddress(Mp5kLib,"mp5k_GPS_CW_Signal");
+	
+    //api.mp5kInit  =( mp5k_init) fcn
+    //HINSTANCE Mp5kLib = api.mp5kLib;
+//	api.mp5kInit				= ( mp5k_init)api.mp5kLib.resolve("mp5k_init");
+    api.mp5kInit                 =  ( mp5k_init)api.mp5kLib.resolve("mp5k_init");
+    api.mp5kAdd					= ( mp5k_add)api.mp5kLib.resolve("mp5k_add");
+    api.mp5kDelete				= ( mp5k_delete)api.mp5kLib.resolve("mp5k_delete");
+    api.mp5kTriggerSetting		= ( mp5k_trigger_setting)api.mp5kLib.resolve("mp5k_trigger_setting");
+    api.mp5kCorrectionSetting	= ( mp5k_correction_setting)api.mp5kLib.resolve("mp5k_correction_setting");
+    api.mp5kXtalTrimSetting		= ( mp5k_xtaltrim_setting)api.mp5kLib.resolve("mp5k_xtaltrim_setting");
+    api.mp5kXtalTrimGetOffset	= ( mp5k_xtaltrim_getoffset)api.mp5kLib.resolve("mp5k_xtaltrim_getoffset");
+    api.mp5kCalSetting			= ( mp5k_cal_setting)api.mp5kLib.resolve("mp5k_cal_setting");
+    api.mp5kCalMeas				= ( mp5k_cal_meas)api.mp5kLib.resolve("mp5k_cal_meas");
+    api.mp5kTXSetting			= ( mp5k_tx_setting)api.mp5kLib.resolve("mp5k_tx_setting");
+    api.mp5kTXMeas				= ( mp5k_tx_meas)api.mp5kLib.resolve("mp5k_tx_meas");
+    api.mp5kTxMeasExtend		= ( mp5k_tx_meas_extend )api.mp5kLib.resolve("mp5k_tx_meas_extend");
+    api.mp5kRXSetting			= ( mp5k_rx_setting)api.mp5kLib.resolve("mp5k_rx_setting");
+    api.mp5kRXStart				= ( mp5k_rx_start)api.mp5kLib.resolve("mp5k_rx_start");
+    api.mp5kBTtxsetting			= ( mp5k_BT_tx_setting )api.mp5kLib.resolve("mp5k_BT_tx_setting");
+    api.mp5kBTtxmeas			= ( mp5k_BT_tx_meas )api.mp5kLib.resolve("mp5k_BT_tx_meas");
+    api.mp5kBTtxmeasExt			= ( mp5k_BT_tx_meas_extend )api.mp5kLib.resolve( "mp5k_BT_tx_meas_extend");
+    api.mp5kBTrxsetting			= ( mp5k_BT_rx_setting )api.mp5kLib.resolve("mp5k_BT_rx_setting");
+    api.mp5kBTrxstart			= ( mp5k_BT_rx_start )api.mp5kLib.resolve("mp5k_BT_rx_start");
+    api.mp5kClose				= ( mp5k_close )api.mp5kLib.resolve("mp5k_close");
+
+    api.mp5kGPSinit				= ( mp5k_GPS_init )api.mp5kLib.resolve("mp5k_GPS_init");
+    api.mp5kGPSadd				= ( mp5k_GPS_add )api.mp5kLib.resolve("mp5k_GPS_add");
+    api.mp5kGPSdelete			= ( mp5k_GPS_delete )api.mp5kLib.resolve("mp5k_GPS_delete");
+    api.mp5kGPSclose			= ( mp5k_GPS_close )api.mp5kLib.resolve("mp5k_GPS_close");
+    api.mp5kGPSSingleCh_Setting	= ( mp5k_GPS_SingleCh_Setting )api.mp5kLib.resolve("mp5k_GPS_SingleCh_Setting");
+    api.mp5kGPSSingleCh_Start	= ( mp5k_GPS_SingleCh_Start )api.mp5kLib.resolve("mp5k_GPS_SingleCh_Start");
+    api.mp5kGPSSingleCh_Stop	= ( mp5k_GPS_SingleCh_Stop )api.mp5kLib.resolve("mp5k_GPS_SingleCh_Stop");
+    api.mp5kGPSCW_Signal		= ( mp5k_GPS_CW_Signal )api.mp5kLib.resolve("mp5k_GPS_CW_Signal");
 	
 	if (
 		( api.mp5kInit				== NULL) ||
@@ -76,7 +85,7 @@ bool mp5k::LoadDll(void)
 		( api.mp5kGPSCW_Signal			== NULL) 		
 		)
 	{
-		FreeLibrary(Mp5kLib);
+    //	FreeLibrary(Mp5kLib);
 		return false;
 	}else
 		return true;
@@ -84,11 +93,11 @@ bool mp5k::LoadDll(void)
 
 void mp5k::FreeDll()
 {
-	if (api.mp5kLib != NULL)
+    if (api.mp5kLib.isLoaded() )
 	{
-		bool tol = FreeLibrary(api.mp5kLib);
-	
-	api.mp5kLib = NULL;
+        //bool tol = FreeLibrary(api.mp5kLib);
+      api.mp5kLib.unload();
+    // api.mp5kLib = NULL;
 	}
 }
 

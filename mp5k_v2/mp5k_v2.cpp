@@ -29,13 +29,7 @@ using namespace std;
 #include "adivic_thread.hpp"
 #include "mp5k_error.h"
 #include <unistd.h>
-
-
-
-
-#define sprintf_s sprintf   // allenm  201707234
-#define strcpy_s  strcpy
-
+#include "types.h"
 
 
 class mp5k_log {

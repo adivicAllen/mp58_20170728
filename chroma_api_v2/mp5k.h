@@ -2,13 +2,15 @@
 #ifndef _MP5K_H_
 #define _MP5K_H_
 #include <QLibrary>
+#include "ADIVIC_Sync_TelnetClient.h"
 /*
 #ifdef _WINDLL
-	#define ADIVIC_TCLIENT_API __declspec(dllexport)
+    #define ADIVIC_TCLIENT_API __declspe
 #else
 	#define ADIVIC_TCLIENT_API __declspec(dllimport)
 #endif
 */
+
 #include "mp5k_define.h"
 
 typedef UINT (*mp5k_init)				(void);
@@ -50,7 +52,7 @@ typedef UINT (*mp5k_GPS_CW_Signal)		( const UINT& handle );
 
 
 typedef struct{
-    QLibrary             mp5kLib;
+    QLibrary                mp5kLib;
     mp5k_init               mp5kInit;
     mp5k_add                mp5kAdd;
     mp5k_delete             mp5kDelete;
@@ -102,8 +104,8 @@ public:
 	void FreeDll();
 
 	// MP5K members
-	UINT Init(void);
-	UINT Add(const char*, UINT& );
+    UINT Init(void);
+    UINT Add(const char*, UINT& );
 	UINT Delete(const UINT&);
 	UINT TriggerSetting(const UINT&, const MP5K_TriggerConfig&);
 	UINT CorrectionSetting(const UINT&, const MP5K_CorrectionConfig&);

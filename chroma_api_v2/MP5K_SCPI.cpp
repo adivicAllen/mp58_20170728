@@ -2,6 +2,7 @@
 #include "MP5K_SCPI.h"
 # include "math.h"
 //#define MP5K	
+#include <QString>
 
 #define TxPower_Max 10
 #define TxPower_Min -130
@@ -62,8 +63,8 @@ bool MP5K_SCPI::ReadRespond(unsigned int &uiRead)
 	{
 		if(advClient.WaitToRead(stdStr_ReadRespond))  // put data to queue
 		{
-			bFlag=true;
-			sscanf_s( stdStr_ReadRespond.c_str(),"%d", &uiRead );
+            bFlag=true;   // allen debug
+            sscanf_s( stdStr_ReadRespond.c_str(),"%d", &uiRead );
 			break;
 		}
 	}
@@ -126,19 +127,22 @@ void MP5K_SCPI::GetCenterFrequency(double &fFreqMHz)
 {
 	stdStr_SendCommand="INPut:FREQuency?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString  csTemp;int iPos=2;
 	UINT64 uiFreqHz=0;
 	if(!WaitUntilReapond())
 		fFreqMHz=-9999;
 	else
 	{
-		csTemp=stdStr_ReadRespond.c_str();
-		iPos=csTemp.FindOneOf(",");
-		csTemp=csTemp.Tokenize(",",iPos);
-		stdStr_ReadRespond=csTemp;
+        csTemp=stdStr_ReadRespond.c_str();
+        //iPos=csTemp.FindOneOf(",");
+        //csTemp=csTemp.Tokenize(",",iPos);
+       /*  allen debug
+        QStringList  _Token = csTemp.split(QRegExp("[,\\. %#]"));
+        stdStr_ReadRespond=__Token.at(1).simplified();
 		//sscanf_s( stdStr_ReadRespond.c_str(),"%ld", &uiFreqHz);   // 0606 allen
-		sscanf_s(stdStr_ReadRespond.c_str(), "%lld", &uiFreqHz); 
+        sscanf_s(stdStr_ReadRespond.c_str(), "%lld", &uiFreqHz);   // allen debug
 		fFreqMHz= static_cast<double>(uiFreqHz/1e6);
+        */
 	}
 }
 
@@ -623,18 +627,26 @@ void MP5K_SCPI::GetChannelPower(double &fChPower)
 
 	stdStr_SendCommand="FETCh:SEGMent1:POWer?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 
 
 	if(!WaitUntilReapond())
 		fChPower=-9999;
 	else
 	{
+
 		csTemp=stdStr_ReadRespond.c_str();
+        /*
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
-		stdStr_ReadRespond=csTemp;
+        */
+        /*  allen debug
+        QStringList _toke = csTemp.split(QRegExp("[,\\. %#]"));
+        csTemp = _toke .at(1).simplified();
+        stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%lf", &fChPower);
+
 	}
 }
 void MP5K_SCPI::GetChannelPowerAverage(double &fChPowerAvge)
@@ -642,16 +654,18 @@ void MP5K_SCPI::GetChannelPowerAverage(double &fChPowerAvge)
 	GetTestRawData();
 	stdStr_SendCommand="FETCh:SEGMent1:POWer:AVERage?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 
 	if(!WaitUntilReapond())
 		fChPowerAvge=-9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /* allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%lf", &fChPowerAvge);
 	}
 }
@@ -660,15 +674,17 @@ void MP5K_SCPI::GetChannelPowerMax(double &fChPowerMax)
 	GetTestRawData();
 	stdStr_SendCommand="FETCh:SEGMent1:POWer:MAXimum?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		fChPowerMax=-9999;
 	else
 	{	
 		csTemp=stdStr_ReadRespond.c_str();
+        /* allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%lf", &fChPowerMax);
 	}
 }
@@ -677,15 +693,17 @@ void MP5K_SCPI::GetChannelPowerMin(double &fChPowerMin)
 	GetTestRawData();
 	stdStr_SendCommand="FETCh:SEGMent1:POWer:MINimum?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		fChPowerMin=-9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /*  allen
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%lf", &fChPowerMin);
 	}
 }
@@ -694,16 +712,18 @@ void MP5K_SCPI::GetChannelPowerPeak(double &fChPowerPeak)
 	GetTestRawData();
 	stdStr_SendCommand="FETCh:SEGMent1:POWer:PEAK?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 
 	if(!WaitUntilReapond())
 		fChPowerPeak=-9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /*  allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%lf", &fChPowerPeak);
 	}
 
@@ -713,15 +733,17 @@ void MP5K_SCPI::GetChannelPowerPeakAverage(double &fChPowerPeakAvge)
 	GetTestRawData();
 	stdStr_SendCommand="FETCh:SEGMent1:POWer:PEAK:AVERage?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		fChPowerPeakAvge=-9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /* allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%lf", &fChPowerPeakAvge);
 	}
 }
@@ -730,15 +752,17 @@ void MP5K_SCPI::GetChannelPowerPeakMax(double &fChPowerPeakMax)
 	GetTestRawData();
 	stdStr_SendCommand="FETCh:SEGMent1:POWer:PEAK:MAXimum?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		fChPowerPeakMax=-9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /* allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%lf", &fChPowerPeakMax);
 	}
 }
@@ -747,15 +771,17 @@ void MP5K_SCPI::GetChannelPowerPeakMin(double &fChPowerPeakMin)
 	GetTestRawData();
 	stdStr_SendCommand="FETCh:SEGMent1:POWer:PEAK:MINimum?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		fChPowerPeakMin=-9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /* allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%lf", &fChPowerPeakMin);
 	}
 }
@@ -795,15 +821,17 @@ void MP5K_SCPI::GetVsaSampleRate(int &iSampleRateMHz)
 	stdStr_SendCommand="INPut:SRATe?\r\n";
 	advClient.Send(stdStr_SendCommand);
 	long lSampleRate_Hz;
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		iSampleRateMHz=-9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /* allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%d", &lSampleRate_Hz);
 		iSampleRateMHz=(int)(lSampleRate_Hz/1000000);
 	}
@@ -844,15 +872,17 @@ void MP5K_SCPI::GetVsaRBW_Hz(UINT64 &uiRBW_Hz)
 {
 	stdStr_SendCommand="CONFigure:GPRF:SPECtrum:RBW?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		uiRBW_Hz=0;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /* allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		//sscanf_s(stdStr_ReadRespond.c_str(), "%d", &uiRBW_Hz);
 		sscanf_s( stdStr_ReadRespond.c_str(),"%I64d", &uiRBW_Hz);
 	}
@@ -915,7 +945,7 @@ void MP5K_SCPI::GetVsaReferenceLevel(double &fRefLevel)
 {
 	stdStr_SendCommand="INPut:LEVel:REFerence?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		fRefLevel=-9999;
 	else
@@ -960,7 +990,7 @@ void MP5K_SCPI::GetVsaCaptureTime(double &fRate_S)
 {
 	stdStr_SendCommand="INPut:CAPTure:TIME?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		fRate_S=-9999;
 	else
@@ -997,15 +1027,17 @@ void MP5K_SCPI::GetVsaCaptureCount(UINT &uiCountNum)
 {
 	stdStr_SendCommand="INPut:CAPTure:COUNt?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		uiCountNum=9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /*  allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%d", &uiCountNum);
 	}
 }
@@ -1030,15 +1062,17 @@ void MP5K_SCPI::GetVsaSkipCaptureCount(UINT &uiSkipNum)
 {
 	stdStr_SendCommand="INPut:CAPTure:COUNt?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		uiSkipNum=9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /*
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%d", &uiSkipNum);
 	}
 }
@@ -1164,7 +1198,7 @@ void MP5K_SCPI::GetMarkerPower(double &fPower)
 
 	stdStr_SendCommand="INPut:GPRF:MARKer:POWer?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	int iIndex=0;
 	if(!WaitUntilReapond())
 		fPower=-9999;
@@ -1187,7 +1221,7 @@ void MP5K_SCPI::GetPowerByTime(double &dPowerByTime)
 
 	stdStr_SendCommand="FETCh:ALL:POWer?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	int iIndex=0;
 	if(!WaitUntilReapond())
 		dPowerByTime=-9999;
@@ -1215,7 +1249,7 @@ void MP5K_SCPI::GetPeakPowerFrequencyHzByTime(double &dPeakPowerFrequencyHzByTim
 
 	stdStr_SendCommand="FETCh:SPECtrum:PEAK:OFRequency?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	int iIndex=0;
 	if(!WaitUntilReapond())
 		dPeakPowerFrequencyHzByTime=-9999;
@@ -1332,7 +1366,7 @@ void MP5K_SCPI::FSK_GetFreqDeviation(double &fFreqDevMHz)
 	unsigned int uiFreqDev_Hz=0;
 	stdStr_SendCommand="CONFigure:GFSK:FREQuency:DEVIation?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		fFreqDevMHz=9999;
 	else
@@ -1385,16 +1419,18 @@ void MP5K_SCPI::FskGetType(USHORT &usType)
 {
 	stdStr_SendCommand="CONFigure:GFSK:FSK:TYPE?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	if(!WaitUntilReapond())
 		usType=9999;
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /*  allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
 	//	sscanf_s( stdStr_ReadRespond.c_str(),"%d", &usType);
+         */
 		sscanf_s(stdStr_ReadRespond.c_str(), "%hd", &usType);
 	}
 }
@@ -1481,6 +1517,7 @@ bool MP5K_SCPI::SetVsgOutputLevel(const double fOutputLevel)
 }
 void MP5K_SCPI::GetVsgOutputLevel(double &fOutputLevel)
 {
+    /*
 	stdStr_SendCommand="OUTPut:POWer:LEVel?\r\n";
 	advClient.Send(stdStr_SendCommand);
 	CStringA csTemp;int iPos=2;
@@ -1494,6 +1531,7 @@ void MP5K_SCPI::GetVsgOutputLevel(double &fOutputLevel)
 		//stdStr_ReadRespond=csTemp;
 		sscanf_s( stdStr_ReadRespond.c_str(),"%lf", &fOutputLevel);
 	}
+    */
 }
 bool MP5K_SCPI::SetVsgPlayFileName(const char * PlayFileName)
 {
@@ -1529,6 +1567,7 @@ bool MP5K_SCPI::SetVsgPlayTimes(const UINT uiTimes)
 }
 void MP5K_SCPI::GetVsgPlayTimes(UINT &uiTimes)
 {
+    /*
 	stdStr_SendCommand="OUTPut:LOOP:COUNt?\r\n";
 	advClient.Send(stdStr_SendCommand);
 	CStringA csTemp;int iPos=2;
@@ -1542,6 +1581,7 @@ void MP5K_SCPI::GetVsgPlayTimes(UINT &uiTimes)
 		stdStr_ReadRespond=csTemp;
 		sscanf_s( stdStr_ReadRespond.c_str(),"%d", &uiTimes);
 	}
+    */
 }
 bool MP5K_SCPI::SetVsgModulationOnOff(const bool bModOn)
 {
@@ -1558,9 +1598,10 @@ bool MP5K_SCPI::SetVsgModulationOnOff(const bool bModOn)
 }
 void MP5K_SCPI::GetVsgModulationOnOff(bool &bModOn)
 {
+
 	stdStr_SendCommand="OUTPut:MODulation:STATe?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	int iTemp=0;
 	if(!WaitUntilReapond())
 	{	
@@ -1575,6 +1616,7 @@ void MP5K_SCPI::GetVsgModulationOnOff(bool &bModOn)
 //		stdStr_ReadRespond=csTemp;
 		sscanf_s( stdStr_ReadRespond.c_str(),"%d",&iTemp);
 	}
+
 	bModOn=iTemp==1?true:false;
 }
 bool MP5K_SCPI::SetVsgRfOnOff(const bool bRfOn)
@@ -1592,9 +1634,10 @@ bool MP5K_SCPI::SetVsgRfOnOff(const bool bRfOn)
 }
 void MP5K_SCPI::GetVsgRfOnOff(bool &bRfOn)
 {
+
 	stdStr_SendCommand="OUTPut:POWer:STATe?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	int iTemp=0;
 	if(!WaitUntilReapond())
 	{	
@@ -1608,6 +1651,7 @@ void MP5K_SCPI::GetVsgRfOnOff(bool &bRfOn)
 		// 		stdStr_ReadRespond=csTemp;
 		sscanf_s( stdStr_ReadRespond.c_str(),"%d",&iTemp);
 	}
+
 	bRfOn=iTemp==1?true:false;
 }
 
@@ -1660,6 +1704,7 @@ bool MP5K_SCPI::Set_CW_Offset(const double fOffsetMHz)
 }
 void MP5K_SCPI::Get_CW_Offset(double &fOffsetMHz)
 {
+    /*
 	stdStr_SendCommand="OUTPut:WAVeform:CWAV:OFFSet?\r\n";
 	advClient.Send(stdStr_SendCommand);
 	CStringA csTemp;int iPos=2;
@@ -1679,6 +1724,7 @@ void MP5K_SCPI::Get_CW_Offset(double &fOffsetMHz)
 		fFreqOffset/=1e6;
 		fOffsetMHz=fFreqOffset;
 	}
+    */
 }
 
 
@@ -1700,9 +1746,10 @@ bool MP5K_SCPI::SetSpectrumOnOff(const bool bModOn)
 }
 void MP5K_SCPI::GetSpectrumOnOff(bool &bModOn)
 {
+
 	stdStr_SendCommand="DISPlay:GRAPhics:STATe?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
 	int iTemp=0;
 	if(!WaitUntilReapond())
 	{	
@@ -1711,11 +1758,14 @@ void MP5K_SCPI::GetSpectrumOnOff(bool &bModOn)
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /*  allen debug
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%d",&iTemp);
 	}
+
 	bModOn=iTemp==1?true:false;
 }
 
@@ -1737,9 +1787,10 @@ bool MP5K_SCPI::SetCableLossTableCoupleMode(const bool bModOn)
 }
 void MP5K_SCPI::GetCableLossTableCoupleMode(bool &bModOn)
 {
+
 	stdStr_SendCommand="TABLe:COUPled?\r\n";
 	advClient.Send(stdStr_SendCommand);
-	CStringA csTemp;int iPos=2;
+    QString csTemp;int iPos=2;
  	int iTemp=0;
 	if(!WaitUntilReapond())
 	{	
@@ -1748,11 +1799,14 @@ void MP5K_SCPI::GetCableLossTableCoupleMode(bool &bModOn)
 	else
 	{
 		csTemp=stdStr_ReadRespond.c_str();
+        /*
 		iPos=csTemp.FindOneOf(",");
 		csTemp=csTemp.Tokenize(",",iPos);
 		stdStr_ReadRespond=csTemp;
+        */
 		sscanf_s( stdStr_ReadRespond.c_str(),"%d",&iTemp);
 	}
+
 	bModOn=iTemp==1?true:false;
 }
 

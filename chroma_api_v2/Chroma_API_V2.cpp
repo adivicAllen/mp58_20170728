@@ -2,7 +2,7 @@
 #include <QDir>
 #include <QSettings>
 #include "Chroma_API_V2.h"
-//#define   sprintf_s  sprintf
+
 #define MAX_STRING_LEN			1014
 #define  DEFAULT_ERROR 9999
 //CChroma_API_V2 theAPP; //****The Only one, don't delete.**** 
@@ -371,7 +371,8 @@ USHORT CChroma_API_V2::InitFunction(const char *IniFilePath)
 
 	if(!Openfile.is_open())
 	{
-        sprintf(s_ErrMessage,"File path:%s open fail",strFilePath.c_str());
+        sprintf_s(s_ErrMessage,"File path:%s open fail",strFilePath.c_str());
+
 		return E_File_No_Exist;
 	}
 	Openfile.close();
@@ -542,7 +543,7 @@ USHORT CChroma_API_V2::LoadCableLoss(QString szFilePath)
 		iCount=0;
 		//while(iIndex<csReadLine.length())
 		{
-             QStringList csTok = csReadLine.split(QRegExp("[,\\. %#]"));
+             QStringList csTok = csReadLine.split(QRegExp(","));
            // QStringA csTok=csReadLine.Tokenize(Symbol,iIndex); // allen QStringA
              for(iIndex =0; iIndex < csTok.size();iIndex ++)
              {

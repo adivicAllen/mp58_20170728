@@ -1,6 +1,7 @@
 #ifndef ADIVIC_SYNC_TELNET_CLIENT_H
 #define ADIVIC_SYNC_TELNET_CLIENT_H
-
+#include <QtCore/qglobal.h>
+/*
 #ifdef VC
     #ifdef _WINDLL
         #define ADIVIC_TCLIENT_API __declspec(dllexport)
@@ -15,6 +16,13 @@
       //  #define ADIVIC_TCLIENT_API __attribute__((dllimport)))
     #endif
 #endif
+*/
+#ifdef _WINDLL
+     #define ADIVIC_TCLIENT_API  Q_DECL_EXPORT
+#else
+     #define ADIVIC_TCLIENT_API  Q_DECL_IMPORT
+#endif
+
 #include "TOP_LEVEL.h"
 #include "Sync_TelnetClient.h"
 
@@ -42,7 +50,7 @@ struct Sync_TelnetImpl
 
 
 #if MP5800API
-class   ADIVIC_TCLIENT_API ADIVIC_Sync_TelnetClient
+class   ADIVIC_TCLIENT_API   ADIVIC_Sync_TelnetClient
 #else
 class    ADIVIC_Sync_TelnetClient
 #endif

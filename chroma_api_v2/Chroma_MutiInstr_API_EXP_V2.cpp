@@ -1,4 +1,4 @@
-//#include "StdAfx.h"
+
 #include "Chroma_MutiInstr_API_EXP_V2.h"
 #include "Chroma_API_V2.h"
 
@@ -130,7 +130,7 @@ CHROMA_API_DLLEXT USHORT  expMV2_InitFunction(const char *IniFilePath)
 	{
 		if(MultiAPP[i].s_bIsServer_OnOff[i]) 
 		{
-			if(MultiAPP[i].s_szServer_IP[i].GetLength()!=0 && MultiAPP[i].s_szServer_Port[i].GetLength()!=0)
+            if(MultiAPP[i].s_szServer_IP[i].length()!=0 && MultiAPP[i].s_szServer_Port[i].length()!=0)
 			{
 				CstringToString(MultiAPP[i].s_szServer_IP[i],sIPAddress);
 				CstringToString(MultiAPP[i].s_szServer_Port[i],sPort);
@@ -213,7 +213,7 @@ CHROMA_API_DLLEXT USHORT expMV2_InputCableLoss(RF_PORT PortIndex,const char *Ins
 		sprintf_s(MultiAPP[usIndex].s_ErrMessage,"Server_%d:No Connection",usIndex);
 		return  E_Server_NO_CONNECT;
 	}
-	CString szFilePath=_T("");
+    QString szFilePath=("");
 	szFilePath=InstrCableLossFilePath;
 	usState=MultiAPP[usIndex].LoadCableLoss(szFilePath);
 	if(usState!=SUCCESS)

@@ -10,6 +10,7 @@
 #include "Dll_Common.h"
 #include "Global_ErrorCode_Def.h"
 #include <QString>
+#include "types.h"
 
 using namespace std;
 
