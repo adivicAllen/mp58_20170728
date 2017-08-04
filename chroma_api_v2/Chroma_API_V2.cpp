@@ -2,7 +2,7 @@
 #include <QDir>
 #include <QSettings>
 #include "Chroma_API_V2.h"
-#define   sprintf_s  sprintf
+//#define   sprintf_s  sprintf
 #define MAX_STRING_LEN			1014
 #define  DEFAULT_ERROR 9999
 //CChroma_API_V2 theAPP; //****The Only one, don't delete.**** 
@@ -371,7 +371,7 @@ USHORT CChroma_API_V2::InitFunction(const char *IniFilePath)
 
 	if(!Openfile.is_open())
 	{
-		sprintf_s(s_ErrMessage,"File path:%s open fail",strFilePath.c_str());
+        sprintf(s_ErrMessage,"File path:%s open fail",strFilePath.c_str());
 		return E_File_No_Exist;
 	}
 	Openfile.close();
@@ -389,68 +389,69 @@ USHORT CChroma_API_V2::ConfingFileParser()
 //----------------------------------------------------------------------------------
     szSectionName=("Server Config Setting");
     szFieldName=("Server_1_IP");
-    QStettings *setting = 0;
-    setting = new QSettinggs (s_szConfigFilePath, QSetting::IniFormat);
+    QSettings *setting = 0;
+    setting = new QSettings (s_szConfigFilePath, QSettings::IniFormat);
     QString ret = setting->value(szSectionName + szFieldName , "r" ).toString();
-	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
- 	szReadString.ReleaseBuffer();
+//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
+// 	szReadString.ReleaseBuffer();
 	s_szServer_IP[0]=szReadString;
 
-	szFieldName=_T("Server_1_Port");
-	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-	szReadString.ReleaseBuffer();
+    szFieldName=("Server_1_Port");
+//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
+//	szReadString.ReleaseBuffer();
 	s_szServer_Port[0]=szReadString;
 
-	szFieldName=_T("Server_2_IP");
-	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-	szReadString.ReleaseBuffer();
+	szFieldName=("Server_2_IP");
+//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
+//	szReadString.ReleaseBuffer();
 	s_szServer_IP[1]=szReadString;
 
-	szFieldName=_T("Server_2_Port");
-	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-	szReadString.ReleaseBuffer();
+    szFieldName=("Server_2_Port");
+//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
+//	szReadString.ReleaseBuffer();
 	s_szServer_Port[1]=szReadString;
 
-	szFieldName=_T("IsServer_1_Open");
-	GetPrivateProfileString( szSectionName,szFieldName,_T("Off"),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-	szReadString.ReleaseBuffer();
+    szFieldName=("IsServer_1_Open");
+//	GetPrivateProfileString( szSectionName,szFieldName,_T("Off"),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
+//	szReadString.ReleaseBuffer();
 	if(szReadString=="On")
 		s_bIsServer_OnOff[0]=true;
 	else
 		s_bIsServer_OnOff[0]=false;
 
-	szFieldName=_T("IsServer_2_Open");
-	GetPrivateProfileString( szSectionName,szFieldName,_T("Off"),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-	szReadString.ReleaseBuffer();
+    szFieldName=("IsServer_2_Open");
+//	GetPrivateProfileString( szSectionName,szFieldName,_T("Off"),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
+//	szReadString.ReleaseBuffer();
 	if(szReadString=="On")
 		s_bIsServer_OnOff[1]=true;
 	else
 		s_bIsServer_OnOff[1]=false;
 	//-------------------------------------------------------------------------------
-	szSectionName=_T("Server File Path");
+    szSectionName=("Server File Path");
 
-	szFieldName=_T("Server_1_PortLossPath");
-	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-	szReadString.ReleaseBuffer();
+    szFieldName=("Server_1_PortLossPath");
+//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
+//	szReadString.ReleaseBuffer();
 	s_szServer_PortLoss[0]=szReadString;
 
-	szFieldName=_T("Server_2_PortLossPath");
-	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-	szReadString.ReleaseBuffer();
+    szFieldName=("Server_2_PortLossPath");
+//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
+//	szReadString.ReleaseBuffer();
 	s_szServer_PortLoss[1]=szReadString;
 	//-------------------------------------------------------
-	szSectionName=_T("Waveform List");
+    szSectionName=("Waveform List");
 	s_vec_WaveformPath.clear();
 	USHORT usIndex=1;
+ /*
 	do 
 	{
-		szFieldName.Format(_T("Waveform_Name_%d"),usIndex++);
-		GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-		szReadString.ReleaseBuffer();
- 		if(szReadString.GetLength()!=0)
+        szFieldName.Format(_T("Waveform_Name_%d"),usIndex++);
+        GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
+        szReadString.ReleaseBuffer();
+        if(szReadString.GetLength()!=0)
  			s_vec_WaveformPath.push_back(szReadString);
 	} while (szReadString.GetLength()!=0);
-
+*/
 	
 	return SUCCESS;
 }
@@ -508,7 +509,7 @@ USHORT CChroma_API_V2::LoadCableLoss(QString szFilePath)
 	int iIndex=0,iCount=0;
 
 	fstream  Openfile; 
-	Openfile.open(strFilePath,ios::in|ios::binary);
+    Openfile.open(strFilePath.c_str(),ios::in|ios::binary);
 	if(!Openfile.is_open())
 	{
 		m_bDutCableLossEnable=false;
@@ -520,8 +521,12 @@ USHORT CChroma_API_V2::LoadCableLoss(QString szFilePath)
 	vec_DutCableLossList.clear();
 	LossPoint PointLoss;
 	std::getline(Openfile, strline); //Skip first line
+ /*                                 allen debug
     QStringA csReadLine=_T("");
     QStringA csData[9],Symbol=_T(",");
+   */
+    QString csReadLine=("");
+    QString csData[9],Symbol=(",");
 	iIndex=0;
 	for(int i=0;i<Port_Nums;i++)
 	{
@@ -535,12 +540,18 @@ USHORT CChroma_API_V2::LoadCableLoss(QString szFilePath)
 
 		iIndex=0;
 		iCount=0;
-		while(iIndex<csReadLine.GetLength())
+		//while(iIndex<csReadLine.length())
 		{
-            QStringA csTok=csReadLine.Tokenize(Symbol,iIndex);
-			csData[iCount++]=csTok.Trim("\t\n ");		
+             QStringList csTok = csReadLine.split(QRegExp("[,\\. %#]"));
+           // QStringA csTok=csReadLine.Tokenize(Symbol,iIndex); // allen QStringA
+             for(iIndex =0; iIndex < csTok.size();iIndex ++)
+             {
+               csData[iCount++]=csTok.at(iIndex).simplified();
+             }
+            
 		}
 		float fTemp;
+        /*  allen
 		sscanf_s(csData[0] ,"%f",& fTemp);PointLoss.fFrequency=abs(fTemp);
 		sscanf_s(csData[1] ,"%f",& PointLoss.fTxLoss[0]);
 		sscanf_s(csData[2] ,"%f",& PointLoss.fTxLoss[1]);
@@ -551,7 +562,7 @@ USHORT CChroma_API_V2::LoadCableLoss(QString szFilePath)
 		sscanf_s(csData[6] ,"%f",& PointLoss.fRxLoss[1]);
 		sscanf_s(csData[7] ,"%f",& PointLoss.fRxLoss[2]);
 		sscanf_s(csData[8] ,"%f",& PointLoss.fRxLoss[3]);
-
+        */
 		vec_DutCableLossList.push_back(PointLoss);
 		for(int i=0;i<Port_Nums;i++)
 		{

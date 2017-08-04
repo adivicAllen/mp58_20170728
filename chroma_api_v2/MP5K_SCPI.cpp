@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "types.h"
 #include "MP5K_SCPI.h"
 # include "math.h"
 //#define MP5K	

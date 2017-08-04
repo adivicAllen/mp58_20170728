@@ -41,7 +41,8 @@ SOURCES += \
     ../ADIVIC_Sync_TelnetClient.cpp \
     ../BoostClient.cpp \
     ../mp5k_v2.cpp \
-    ../Sync_TelnetClient.cpp
+    ../Sync_TelnetClient.cpp \
+    ../types.cpp
 
 
 LIBS += -L"/home/allen/boost_1_61_0/stage/lib/"

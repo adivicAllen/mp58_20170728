@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "IniSetting.h"
 #define MAX_STRING_LEN			1000
 

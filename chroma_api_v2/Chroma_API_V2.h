@@ -17,7 +17,7 @@
 #include "IniSetting.h"
 #include "mp5k.h"
 #include <QString>
-
+#define sprintf sprintf_s
  
 
 

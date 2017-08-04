@@ -36,10 +36,7 @@ using namespace std;
 #define sprintf_s sprintf   // allenm  201707234
 #define strcpy_s  strcpy
 
-void Sleep(int sleepTime)
-{
-    usleep(((useconds_t)sleepTime)*1000);
-}
+
 
 class mp5k_log {
     private:
