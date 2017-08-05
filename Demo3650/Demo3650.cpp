@@ -2,14 +2,13 @@
 // vcDemo.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include <stdio.h>
-#include <conio.h>
+#include <curses.h>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 #define WINDOWS_LEAN_AND_MEAN
-#include <windows.h>
+#include "types.h"
 #include <string>
 #include  <map>
 using namespace std;
@@ -134,7 +133,7 @@ UINT CWTestSub(int i)
   
       // control
 
-      result = MP5800_setVSG( RF_PORT_1, vsgConfig );// 0 means continuous
+    //  result = MP5800_setVSG( RF_PORT_1, vsgConfig );// 0 means continuous
       cout << "MP5800_setVSG :" << result << endl;
       if (result) { return result; }
 
@@ -824,13 +823,13 @@ void AdivicTest()
    }
 }
 
-
+/*
 int _tmain(int argc, _TCHAR* argv[])
 {
 	AdivicTest();
 	system("pause");
 	return 0;
 }
-
+*/
 
 

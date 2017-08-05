@@ -12,6 +12,7 @@ typedef char            BYTE;
 typedef char            byte;
 
 typedef unsigned int    UINT;
+typedef int             INT ;
 
 
 typedef unsigned short   USHORT;

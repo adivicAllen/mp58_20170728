@@ -25,7 +25,7 @@ bool bInit = false;
 
 std::map<int,  MP5800_TABLE> mp5800Table;
 std::vector<int> mp5800TableIndex;
-std::map<int,std::vector<MEASURE_ITEM>> mp5800MeasureItemIndex;
+std::map<int,std::vector<MEASURE_ITEM> > mp5800MeasureItemIndex;
 std::map<BT_PACKET_TYPE, std::string> btPackageType;
 std::map<BT_DATA_TYPE, std::string> btDataType;
 

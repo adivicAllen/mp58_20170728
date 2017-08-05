@@ -55,3 +55,12 @@ DEFINES += _WINDLL \
           MP5K_V2_EXPORTS  \
          _UNICODE     \
          UNICODE
+
+DESTDIR = $$_PRO_FILE_PWD_/../../lib
+message($$_PRO_FILE_)
+message($$_PRO_FILE_PWD_)
+unix {
+    target.path = /usr/lib
+    INSTALLS += target
+}
+

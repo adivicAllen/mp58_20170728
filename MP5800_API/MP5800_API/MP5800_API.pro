@@ -25,6 +25,11 @@ HEADERS += mp5800_api.h\
     ../MP5800_API_const.h \
     ../MP5800_Measure_Item.h
 
+DESTDIR = $$_PRO_FILE_PWD_/../../lib
+message($$_PRO_FILE_)
+message($$_PRO_FILE_PWD_)
+
+
 unix {
     target.path = /usr/lib
     INSTALLS += target

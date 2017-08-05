@@ -52,12 +52,14 @@ SOURCES       = ../ADIVIC_Logger.cpp \
 		../ADIVIC_Sync_TelnetClient.cpp \
 		../BoostClient.cpp \
 		../mp5k_v2.cpp \
-		../Sync_TelnetClient.cpp moc_AdivicGlobal.cpp
+		../Sync_TelnetClient.cpp \
+		../types.cpp moc_AdivicGlobal.cpp
 OBJECTS       = ADIVIC_Logger.o \
 		ADIVIC_Sync_TelnetClient.o \
 		BoostClient.o \
 		mp5k_v2.o \
 		Sync_TelnetClient.o \
+		types.o \
 		moc_AdivicGlobal.o
 DIST          = ../mp5000.pro.user \
 		../config \
@@ -214,17 +216,17 @@ DIST          = ../mp5000.pro.user \
 		../MP5000_SCPI.h \
 		../resource.h \
 		../Sync_TelnetClient.h \
-		../targetver.h \
 		../TOP_LEVEL.h \
 		../types.h ../ADIVIC_Logger.cpp \
 		../ADIVIC_Sync_TelnetClient.cpp \
 		../BoostClient.cpp \
 		../mp5k_v2.cpp \
-		../Sync_TelnetClient.cpp
+		../Sync_TelnetClient.cpp \
+		../types.cpp
 QMAKE_TARGET  = mp5k_v2
-DESTDIR       = #avoid trailing-slash linebreak
+DESTDIR       = ../../lib/#avoid trailing-slash linebreak
 TARGET        = libmp5k_v2.so.1.0.0
-TARGETA       = libmp5k_v2.a
+TARGETA       = ../../lib/libmp5k_v2.a
 TARGET0       = libmp5k_v2.so
 TARGETD       = libmp5k_v2.so.1.0.0
 TARGET1       = libmp5k_v2.so.1
@@ -253,12 +255,21 @@ first: all
 
 ####### Build rules
 
-$(TARGET):  $(OBJECTS) $(SUBLIBS) $(OBJCOMP)  
+../../lib/$(TARGET):  $(OBJECTS) $(SUBLIBS) $(OBJCOMP)  
+	@test -d ../../lib/ || mkdir -p ../../lib/
 	-$(DEL_FILE) $(TARGET) $(TARGET0) $(TARGET1) $(TARGET2)
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS) $(OBJCOMP)
 	-ln -s $(TARGET) $(TARGET0)
 	-ln -s $(TARGET) $(TARGET1)
 	-ln -s $(TARGET) $(TARGET2)
+	-$(DEL_FILE) ../../lib/$(TARGET)
+	-$(MOVE) $(TARGET)  ../../lib/ 
+	-$(DEL_FILE) ../../lib/$(TARGET0)
+	-$(DEL_FILE) ../../lib/$(TARGET1)
+	-$(DEL_FILE) ../../lib/$(TARGET2)
+	-$(MOVE) $(TARGET0) ../../lib/ 
+	-$(MOVE) $(TARGET1) ../../lib/ 
+	-$(MOVE) $(TARGET2) ../../lib/ 
 
 
 
@@ -545,7 +556,7 @@ qmake: FORCE
 qmake_all: FORCE
 
 
-all: Makefile $(TARGET)
+all: Makefile ../../lib/$(TARGET)
 
 dist: distdir FORCE
 	(cd `dirname $(DISTDIR)` && $(TAR) $(DISTNAME).tar $(DISTNAME) && $(COMPRESS) $(DISTNAME).tar) && $(MOVE) `dirname $(DISTDIR)`/$(DISTNAME).tar.gz . && $(DEL_FILE) -r $(DISTDIR)
@@ -553,8 +564,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../AdivicGlobal.hpp ../ADIVIC_Logger.h ../ADIVIC_Sync_TelnetClient.h ../adivic_thread.hpp ../BoostClient.h ../define.h ../Dut_define.h ../MFG_INCLUDE.h ../MFG_TOOL_Define.h ../mp5k_define.h ../mp5k_error.h ../mp5k_v2.h ../mp5000.h ../mp5000_global.h ../MP5000_SCPI.h ../resource.h ../Sync_TelnetClient.h ../targetver.h ../TOP_LEVEL.h ../types.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../ADIVIC_Logger.cpp ../ADIVIC_Sync_TelnetClient.cpp ../BoostClient.cpp ../mp5k_v2.cpp ../Sync_TelnetClient.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../AdivicGlobal.hpp ../ADIVIC_Logger.h ../ADIVIC_Sync_TelnetClient.h ../adivic_thread.hpp ../BoostClient.h ../define.h ../Dut_define.h ../MFG_INCLUDE.h ../MFG_TOOL_Define.h ../mp5k_define.h ../mp5k_error.h ../mp5k_v2.h ../mp5000.h ../mp5000_global.h ../MP5000_SCPI.h ../resource.h ../Sync_TelnetClient.h ../TOP_LEVEL.h ../types.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../ADIVIC_Logger.cpp ../ADIVIC_Sync_TelnetClient.cpp ../BoostClient.cpp ../mp5k_v2.cpp ../Sync_TelnetClient.cpp ../types.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -563,8 +574,8 @@ clean: compiler_clean
 
 
 distclean: clean 
-	-$(DEL_FILE) $(TARGET) 
-	-$(DEL_FILE) $(TARGET0) $(TARGET1) $(TARGET2) $(TARGETA)
+	-$(DEL_FILE) ../../lib/$(TARGET) 
+	-$(DEL_FILE) ../../lib/$(TARGET0) ../../lib/$(TARGET1) ../../lib/$(TARGET2) $(TARGETA)
 	-$(DEL_FILE) Makefile
 
 
@@ -669,6 +680,7 @@ ADIVIC_Logger.o: ../ADIVIC_Logger.cpp ../ADIVIC_Logger.h \
 		../define.h \
 		../TOP_LEVEL.h \
 		../types.h \
+		../../../Tools/5.5/gcc/include/QtCore/QtGlobal \
 		../../../Tools/5.5/gcc/include/QtCore/qglobal.h \
 		../../../Tools/5.5/gcc/include/QtCore/qconfig.h \
 		../../../Tools/5.5/gcc/include/QtCore/qfeatures.h \
@@ -2925,6 +2937,34 @@ ADIVIC_Logger.o: ../ADIVIC_Logger.cpp ../ADIVIC_Logger.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ADIVIC_Logger.o ../ADIVIC_Logger.cpp
 
 ADIVIC_Sync_TelnetClient.o: ../ADIVIC_Sync_TelnetClient.cpp ../ADIVIC_Sync_TelnetClient.h \
+		../../../Tools/5.5/gcc/include/QtCore/qglobal.h \
+		../../../Tools/5.5/gcc/include/QtCore/qconfig.h \
+		../../../Tools/5.5/gcc/include/QtCore/qfeatures.h \
+		../../../Tools/5.5/gcc/include/QtCore/qsystemdetection.h \
+		../../../Tools/5.5/gcc/include/QtCore/qprocessordetection.h \
+		../../../Tools/5.5/gcc/include/QtCore/qcompilerdetection.h \
+		../../../Tools/5.5/gcc/include/QtCore/qtypeinfo.h \
+		../../../Tools/5.5/gcc/include/QtCore/qtypetraits.h \
+		../../../Tools/5.5/gcc/include/QtCore/qsysinfo.h \
+		../../../Tools/5.5/gcc/include/QtCore/qlogging.h \
+		../../../Tools/5.5/gcc/include/QtCore/qflags.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic.h \
+		../../../Tools/5.5/gcc/include/QtCore/qbasicatomic.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_bootstrap.h \
+		../../../Tools/5.5/gcc/include/QtCore/qgenericatomic.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_cxx11.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_gcc.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_msvc.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_armv7.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_armv6.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_armv5.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_ia64.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_mips.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_x86.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_unix.h \
+		../../../Tools/5.5/gcc/include/QtCore/qglobalstatic.h \
+		../../../Tools/5.5/gcc/include/QtCore/qmutex.h \
+		../../../Tools/5.5/gcc/include/QtCore/qnumeric.h \
 		../TOP_LEVEL.h \
 		../Sync_TelnetClient.h \
 		../../../boost_1_61_0/boost/asio.hpp \
@@ -4574,34 +4614,7 @@ ADIVIC_Sync_TelnetClient.o: ../ADIVIC_Sync_TelnetClient.cpp ../ADIVIC_Sync_Telne
 		../ADIVIC_Logger.h \
 		../define.h \
 		../types.h \
-		../../../Tools/5.5/gcc/include/QtCore/qglobal.h \
-		../../../Tools/5.5/gcc/include/QtCore/qconfig.h \
-		../../../Tools/5.5/gcc/include/QtCore/qfeatures.h \
-		../../../Tools/5.5/gcc/include/QtCore/qsystemdetection.h \
-		../../../Tools/5.5/gcc/include/QtCore/qprocessordetection.h \
-		../../../Tools/5.5/gcc/include/QtCore/qcompilerdetection.h \
-		../../../Tools/5.5/gcc/include/QtCore/qtypeinfo.h \
-		../../../Tools/5.5/gcc/include/QtCore/qtypetraits.h \
-		../../../Tools/5.5/gcc/include/QtCore/qsysinfo.h \
-		../../../Tools/5.5/gcc/include/QtCore/qlogging.h \
-		../../../Tools/5.5/gcc/include/QtCore/qflags.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic.h \
-		../../../Tools/5.5/gcc/include/QtCore/qbasicatomic.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_bootstrap.h \
-		../../../Tools/5.5/gcc/include/QtCore/qgenericatomic.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_cxx11.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_gcc.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_msvc.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_armv7.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_armv6.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_armv5.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_ia64.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_mips.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_x86.h \
-		../../../Tools/5.5/gcc/include/QtCore/qatomic_unix.h \
-		../../../Tools/5.5/gcc/include/QtCore/qglobalstatic.h \
-		../../../Tools/5.5/gcc/include/QtCore/qmutex.h \
-		../../../Tools/5.5/gcc/include/QtCore/qnumeric.h \
+		../../../Tools/5.5/gcc/include/QtCore/QtGlobal \
 		../MFG_INCLUDE.h \
 		../../../boost_1_61_0/boost/log/trivial.hpp \
 		../../../boost_1_61_0/boost/log/detail/config.hpp \
@@ -8095,6 +8108,7 @@ mp5k_v2.o: ../mp5k_v2.cpp ../../../Tools/5.5/gcc/include/QtCore/QObject \
 		../mp5k_define.h \
 		../define.h \
 		../types.h \
+		../../../Tools/5.5/gcc/include/QtCore/QtGlobal \
 		../MP5000_SCPI.h \
 		../ADIVIC_Sync_TelnetClient.h \
 		../Sync_TelnetClient.h \
@@ -10765,14 +10779,61 @@ Sync_TelnetClient.o: ../Sync_TelnetClient.cpp ../Sync_TelnetClient.h \
 		../../../boost_1_61_0/boost/algorithm/string/join.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Sync_TelnetClient.o ../Sync_TelnetClient.cpp
 
+types.o: ../types.cpp ../types.h \
+		../../../Tools/5.5/gcc/include/QtCore/QtGlobal \
+		../../../Tools/5.5/gcc/include/QtCore/qglobal.h \
+		../../../Tools/5.5/gcc/include/QtCore/qconfig.h \
+		../../../Tools/5.5/gcc/include/QtCore/qfeatures.h \
+		../../../Tools/5.5/gcc/include/QtCore/qsystemdetection.h \
+		../../../Tools/5.5/gcc/include/QtCore/qprocessordetection.h \
+		../../../Tools/5.5/gcc/include/QtCore/qcompilerdetection.h \
+		../../../Tools/5.5/gcc/include/QtCore/qtypeinfo.h \
+		../../../Tools/5.5/gcc/include/QtCore/qtypetraits.h \
+		../../../Tools/5.5/gcc/include/QtCore/qsysinfo.h \
+		../../../Tools/5.5/gcc/include/QtCore/qlogging.h \
+		../../../Tools/5.5/gcc/include/QtCore/qflags.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic.h \
+		../../../Tools/5.5/gcc/include/QtCore/qbasicatomic.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_bootstrap.h \
+		../../../Tools/5.5/gcc/include/QtCore/qgenericatomic.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_cxx11.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_gcc.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_msvc.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_armv7.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_armv6.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_armv5.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_ia64.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_mips.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_x86.h \
+		../../../Tools/5.5/gcc/include/QtCore/qatomic_unix.h \
+		../../../Tools/5.5/gcc/include/QtCore/qglobalstatic.h \
+		../../../Tools/5.5/gcc/include/QtCore/qmutex.h \
+		../../../Tools/5.5/gcc/include/QtCore/qnumeric.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o types.o ../types.cpp
+
 moc_AdivicGlobal.o: moc_AdivicGlobal.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_AdivicGlobal.o moc_AdivicGlobal.cpp
 
 ####### Install
 
-install:  FORCE
+install_target: first FORCE
+	@test -d $(INSTALL_ROOT)/usr/lib || mkdir -p $(INSTALL_ROOT)/usr/lib
+	-$(INSTALL_PROGRAM) ../../lib/$(TARGET) $(INSTALL_ROOT)/usr/lib/$(TARGET)
+	-$(SYMLINK) $(TARGET) $(INSTALL_ROOT)/usr/lib/$(TARGET0)
+	-$(SYMLINK) $(TARGET) $(INSTALL_ROOT)/usr/lib/$(TARGET1)
+	-$(SYMLINK) $(TARGET) $(INSTALL_ROOT)/usr/lib/$(TARGET2)
 
-uninstall:  FORCE
+uninstall_target: FORCE
+	-$(DEL_FILE) $(INSTALL_ROOT)/usr/lib/$(TARGET) 
+	 -$(DEL_FILE) $(INSTALL_ROOT)/usr/lib/$(TARGET0) 
+	 -$(DEL_FILE) $(INSTALL_ROOT)/usr/lib/$(TARGET1) 
+	 -$(DEL_FILE) $(INSTALL_ROOT)/usr/lib/$(TARGET2)
+	-$(DEL_DIR) $(INSTALL_ROOT)/usr/lib/ 
+
+
+install: install_target  FORCE
+
+uninstall: uninstall_target  FORCE
 
 FORCE:
 
