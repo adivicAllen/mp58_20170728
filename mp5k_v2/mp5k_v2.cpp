@@ -1,9 +1,5 @@
 ﻿// mp5k_v2.cpp : Defines the exported functions for the DLL application.
 //
-#ifdef VC
-  #include "stdafx.h"
-#endif
-
 #include <QObject>
 #include <QDebug>
 #include <QThread>

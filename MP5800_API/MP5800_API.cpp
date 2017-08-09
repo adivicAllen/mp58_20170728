@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+
 using namespace std;
 #include "MP5800_API.h"
 #include "Chroma_MutiInstr_API_EXP_V2.h"
@@ -269,6 +270,7 @@ UINT initSub()
 MP5800_API  UINT   MP5800_connect( const char *IniFilePath , const bool bDisplay , const bool bDebugMode)
 {
     
+
 	UINT failure = MP5800_ERROR ;
 	failure =  expMV2_InitFunction( IniFilePath );
 	if (failure) 

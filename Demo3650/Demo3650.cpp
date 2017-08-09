@@ -11,6 +11,7 @@
 #include "types.h"
 #include <string>
 #include  <map>
+
 using namespace std;
 #define CUSTOMIZED_TABLE    1
 
@@ -582,7 +583,8 @@ void AdivicTest()
 	//outFile = new(ostream);  .open("..\\RF_LOGS\\data.txt");
    // ================== initial ================
    initMap();
-    result = MP5800_connect( "..\\InitConfigFile.ini", true);
+
+    result = MP5800_connect( "../InitConfigFile.ini", true);
      cout << "MP5800_connect :" <<  result << endl ;
     if (result) { exit(0); }
 

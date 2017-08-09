@@ -1,7 +1,8 @@
 
 #include "Chroma_MutiInstr_API_EXP_V2.h"
 #include "Chroma_API_V2.h"
-
+#include <QSettings>
+#include <QDebug>
 #define ConnectDelay 500
 #define SetPortDelay 0		//20
 #define GetMarkDelay 0		//15
@@ -85,6 +86,7 @@ CHROMA_API_DLLEXT USHORT  expMV2_InitFunction(const char *IniFilePath)
 {
 	USHORT usState=SUCCESS;
 	//Parser Init Config File
+
 	usState=MultiAPP[0].InitFunction(IniFilePath);
 	if(usState!=SUCCESS)
 	{
@@ -131,9 +133,10 @@ CHROMA_API_DLLEXT USHORT  expMV2_InitFunction(const char *IniFilePath)
 		if(MultiAPP[i].s_bIsServer_OnOff[i]) 
 		{
             if(MultiAPP[i].s_szServer_IP[i].length()!=0 && MultiAPP[i].s_szServer_Port[i].length()!=0)
-			{
-				CstringToString(MultiAPP[i].s_szServer_IP[i],sIPAddress);
-				CstringToString(MultiAPP[i].s_szServer_Port[i],sPort);
+            {
+                sIPAddress = MultiAPP[i].s_szServer_IP[i].toStdString();
+                sPort = MultiAPP[i].s_szServer_Port[i].toStdString();
+
 				if ( !MultiAPP[i].s_bIsServer_Connected[i] )  // no connection 
 				{
 				  bFlag=MultiAPP[i].ConnectSever(sIPAddress.c_str(),sPort.c_str(),15);

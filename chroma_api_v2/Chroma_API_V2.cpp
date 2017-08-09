@@ -1,7 +1,10 @@
 #include <QString>
 #include <QDir>
 #include <QSettings>
+#include <QDebug>
 #include "Chroma_API_V2.h"
+//#include "libtest.h"
+
 
 #define MAX_STRING_LEN			1014
 #define  DEFAULT_ERROR 9999
@@ -304,10 +307,7 @@ USHORT CChroma_API_V2::PresetFunc()
 	if(  !SetCableLossTableCoupleMode(false)  ) 
 	{
 		return FAIL;
-	}
-	  
-		
-	     
+    }
 
 	Adivic_MP5K.SetMeasureMode(_MOD_GPRF);
 
@@ -378,81 +378,84 @@ USHORT CChroma_API_V2::InitFunction(const char *IniFilePath)
 	Openfile.close();
 	s_szConfigFilePath=IniFilePath;
 	
-	usState=ConfingFileParser(); //Init Config file parser
+
+    usState=ConfingFileParser(); //Init Config file parser
 
 	return usState;
 }
 USHORT CChroma_API_V2::ConfingFileParser()
 {
+
     QString szSectionName=("");
     QString szFieldName=("");
     QString szReadString=("");
-//----------------------------------------------------------------------------------
+    QString settingKey;
+    QSettings settings(s_szConfigFilePath , QSettings::IniFormat);
     szSectionName=("Server Config Setting");
     szFieldName=("Server_1_IP");
-    QSettings *setting = 0;
-    setting = new QSettings (s_szConfigFilePath, QSettings::IniFormat);
-    QString ret = setting->value(szSectionName + szFieldName , "r" ).toString();
-//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-// 	szReadString.ReleaseBuffer();
-	s_szServer_IP[0]=szReadString;
+    settingKey = QString("%1/%2").arg(szSectionName).arg(szFieldName);
+    s_szServer_IP[0]= settings.value(settingKey).toString();
+    qDebug()<<"s_szServer_IP[0] =" << s_szServer_IP[0] << endl;
 
     szFieldName=("Server_1_Port");
-//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-//	szReadString.ReleaseBuffer();
-	s_szServer_Port[0]=szReadString;
+    settingKey = QString("%1/%2").arg(szSectionName).arg(szFieldName);
+    s_szServer_Port[0]=settings.value(settingKey).toString();
+    qDebug()<<"s_szServer_Port[0] =" << s_szServer_Port[0] << endl;
 
 	szFieldName=("Server_2_IP");
-//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-//	szReadString.ReleaseBuffer();
-	s_szServer_IP[1]=szReadString;
+    settingKey = QString("%1/%2").arg(szSectionName).arg(szFieldName);
+    s_szServer_IP[1]=settings.value(settingKey).toString();
+     qDebug()<<"s_szServer_IP[1] =" << s_szServer_IP[1] << endl;
 
     szFieldName=("Server_2_Port");
-//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-//	szReadString.ReleaseBuffer();
-	s_szServer_Port[1]=szReadString;
+    settingKey = QString("%1/%2").arg(szSectionName).arg(szFieldName);
+    s_szServer_Port[1] = settings.value(settingKey).toString();
+    qDebug()<<"s_szServer_Port[1] =" << s_szServer_Port[1] << endl;
 
     szFieldName=("IsServer_1_Open");
-//	GetPrivateProfileString( szSectionName,szFieldName,_T("Off"),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-//	szReadString.ReleaseBuffer();
+    settingKey = QString("%1/%2").arg(szSectionName).arg(szFieldName);
+    szReadString = settings.value(settingKey).toString();
+    qDebug()<<"s_szServer_OnOff[0] =" << szReadString << endl;
+
 	if(szReadString=="On")
 		s_bIsServer_OnOff[0]=true;
 	else
 		s_bIsServer_OnOff[0]=false;
 
     szFieldName=("IsServer_2_Open");
-//	GetPrivateProfileString( szSectionName,szFieldName,_T("Off"),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-//	szReadString.ReleaseBuffer();
+    settingKey = QString("%1/%2").arg(szSectionName).arg(szFieldName);
+    szReadString = settings.value(settingKey).toString();
 	if(szReadString=="On")
 		s_bIsServer_OnOff[1]=true;
 	else
 		s_bIsServer_OnOff[1]=false;
+     qDebug()<<"s_szServer_OnOff[1] =" << szReadString << endl;
 	//-------------------------------------------------------------------------------
     szSectionName=("Server File Path");
-
     szFieldName=("Server_1_PortLossPath");
-//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-//	szReadString.ReleaseBuffer();
-	s_szServer_PortLoss[0]=szReadString;
-
+    settingKey = QString("%1/%2").arg(szSectionName).arg(szFieldName);
+    s_szServer_PortLoss[0]=settings.value(settingKey).toString();
+     qDebug()<<"s_szServer_PortLoss[0] =" << s_szServer_PortLoss[0] << endl;
     szFieldName=("Server_2_PortLossPath");
-//	GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-//	szReadString.ReleaseBuffer();
-	s_szServer_PortLoss[1]=szReadString;
+    settingKey = QString("%1/%2").arg(szSectionName).arg(szFieldName);
+    s_szServer_PortLoss[1]=settings.value(settingKey).toString();
+      qDebug()<<"s_szServer_PortLoss[1] =" << s_szServer_PortLoss[1] << endl;
 	//-------------------------------------------------------
     szSectionName=("Waveform List");
 	s_vec_WaveformPath.clear();
 	USHORT usIndex=1;
- /*
+
 	do 
 	{
-        szFieldName.Format(_T("Waveform_Name_%d"),usIndex++);
-        GetPrivateProfileString( szSectionName,szFieldName,_T(""),szReadString.GetBuffer(MAX_STRING_LEN),100,s_szConfigFilePath);
-        szReadString.ReleaseBuffer();
-        if(szReadString.GetLength()!=0)
+        szFieldName.sprintf(("Waveform_Name_%d"),usIndex++);
+        settingKey = QString("%1/%2").arg(szSectionName).arg(szFieldName);
+         qDebug()<< "waveform settingKey = " << settingKey << endl;
+        szReadString = settings.value(settingKey).toString();
+        qDebug()<<szFieldName << "= " <<  szReadString << endl;
+        if(szReadString.length()!=0)
  			s_vec_WaveformPath.push_back(szReadString);
-	} while (szReadString.GetLength()!=0);
-*/
+    } while (szReadString.length()!=0);
+
 	
 	return SUCCESS;
 }
@@ -522,10 +525,8 @@ USHORT CChroma_API_V2::LoadCableLoss(QString szFilePath)
 	vec_DutCableLossList.clear();
 	LossPoint PointLoss;
 	std::getline(Openfile, strline); //Skip first line
- /*                                 allen debug
-    QStringA csReadLine=_T("");
-    QStringA csData[9],Symbol=_T(",");
-   */
+
+
     QString csReadLine=("");
     QString csData[9],Symbol=(",");
 	iIndex=0;
@@ -538,23 +539,22 @@ USHORT CChroma_API_V2::LoadCableLoss(QString szFilePath)
 	while (std::getline(Openfile, strline))
 	{
 		csReadLine=strline.c_str();
+        csReadLine.remove(QRegExp("\\r|\\t|\\n"));
+        QStringList csTok = csReadLine.split(QRegExp(","));
 
-		iIndex=0;
-		iCount=0;
-		//while(iIndex<csReadLine.length())
-		{
-             QStringList csTok = csReadLine.split(QRegExp(","));
-           // QStringA csTok=csReadLine.Tokenize(Symbol,iIndex); // allen QStringA
-             for(iIndex =0; iIndex < csTok.size();iIndex ++)
-             {
-               csData[iCount++]=csTok.at(iIndex).simplified();
-             }
-            
-		}
-		float fTemp;
-        /*  allen
-		sscanf_s(csData[0] ,"%f",& fTemp);PointLoss.fFrequency=abs(fTemp);
-		sscanf_s(csData[1] ,"%f",& PointLoss.fTxLoss[0]);
+        float fTemp;
+        fTemp = csTok.at(0).simplified().toFloat();
+        PointLoss.fFrequency=abs(fTemp);
+        for (int i=0; i<4;i++)
+        {
+            PointLoss.fTxLoss[i] = csTok.at(i+1).simplified().toFloat();
+            PointLoss.fRxLoss[i] = csTok.at(i+5).simplified().toFloat();
+        }
+
+       
+        /*
+        sscanf_s(csData[0] ,"%f",& fTemp);PointLoss.fFrequency=abs(fTemp);
+        sscanf_s(csData[1] ,"%f",& PointLoss.fTxLoss[0]);
 		sscanf_s(csData[2] ,"%f",& PointLoss.fTxLoss[1]);
 		sscanf_s(csData[3] ,"%f",& PointLoss.fTxLoss[2]);
 		sscanf_s(csData[4] ,"%f",& PointLoss.fTxLoss[3]);
@@ -1498,9 +1498,7 @@ UINT CChroma_API_V2::Get_WIFI_RX(   double         &TXPowerdBm,               \
 		case 7 : Bt_TxCfg.Type = (PACKET_TYPE) 10 ; break;
 		case 8 : Bt_TxCfg.Type = (PACKET_TYPE) 11 ; break;
 		case 9   : Bt_TxCfg.Type = (PACKET_TYPE) 12; 
-		}
-
-		 
+        }
 
 		ErrorCode = Adivic_MP5KWifiBT.BT_Tx_Setting( handle , Bt_TxCfg );
 		Sleep(200);

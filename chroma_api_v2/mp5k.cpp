@@ -14,23 +14,27 @@ mp5k::~mp5k(void)
 
 bool mp5k::LoadDll(void)
 {
-    if ( !QLibrary::isLibrary("mp5k.so") )
-    {
-        qDebug() << "uuirtdrv does not exist.";
-    }
 
-    api.mp5kLib.setFileName("mp5k.so");
 
-    if (api.mp5kLib.load())
+    api.mp5kLib.setFileName("/home/allen/mp58_20170728/lib/libmp5k_v2.so");
+
+    if (!api.mp5kLib.load())
 	{
 		return false;
 	}
+/*
+    QLibrary shareLibrary("/home/allen/mp58_20170728/lib/libmp5k_v2.so") ;
+  //  QLibrary shareLibrary("libmp5k_v2.so") ;
 
-	
-    //api.mp5kInit  =( mp5k_init) fcn
+    shareLibrary.load();
+    if ( ! shareLibrary.isLoaded() )
+    {
+        qDebug() << shareLibrary.errorString() ;
+    }
+*/
+
     //HINSTANCE Mp5kLib = api.mp5kLib;
-//	api.mp5kInit				= ( mp5k_init)api.mp5kLib.resolve("mp5k_init");
-    api.mp5kInit                 =  ( mp5k_init)api.mp5kLib.resolve("mp5k_init");
+    api.mp5kInit                =  ( mp5k_init)api.mp5kLib.resolve("mp5k_init");
     api.mp5kAdd					= ( mp5k_add)api.mp5kLib.resolve("mp5k_add");
     api.mp5kDelete				= ( mp5k_delete)api.mp5kLib.resolve("mp5k_delete");
     api.mp5kTriggerSetting		= ( mp5k_trigger_setting)api.mp5kLib.resolve("mp5k_trigger_setting");

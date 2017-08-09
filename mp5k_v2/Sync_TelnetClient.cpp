@@ -1,5 +1,3 @@
-
-// #include "stdafx.h"  //allen
 #include "Sync_TelnetClient.h"
 
 

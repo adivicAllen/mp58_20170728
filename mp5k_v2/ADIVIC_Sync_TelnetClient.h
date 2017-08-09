@@ -1,22 +1,7 @@
 #ifndef ADIVIC_SYNC_TELNET_CLIENT_H
 #define ADIVIC_SYNC_TELNET_CLIENT_H
 #include <QtCore/qglobal.h>
-/*
-#ifdef VC
-    #ifdef _WINDLL
-        #define ADIVIC_TCLIENT_API __declspec(dllexport)
-    #else
-        #define ADIVIC_TCLIENT_API __declspec(dllimport)
-    #endif
-#else
-    #ifdef _WINDLL
-    //    #define ADIVIC_TCLIENT_API __attribute__((dllexport))
-       #define ADIVIC_TCLIENT_API __attribute__ ((visibility ("default")))
-    #else
-      //  #define ADIVIC_TCLIENT_API __attribute__((dllimport)))
-    #endif
-#endif
-*/
+
 #ifdef _WINDLL
      #define ADIVIC_TCLIENT_API  Q_DECL_EXPORT
 #else

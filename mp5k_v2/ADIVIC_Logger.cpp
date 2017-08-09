@@ -25,7 +25,7 @@ void ADIVIC_Logger::CreateLog(const std::string& LogName)
 	}
 
 
-	std::string LogNameTemp = "..\\RF_LOGS\\"+ LogName + "_%Y-%m-%d_%H-%M-%S.log";
+    std::string LogNameTemp = "../RF_LOGS/"+ LogName + "_%Y-%m-%d_%H-%M-%S.log";
 
 	boost::shared_ptr< boost::log::sinks::text_file_backend > backend = 
 		boost::make_shared< boost::log::sinks::text_file_backend >(
