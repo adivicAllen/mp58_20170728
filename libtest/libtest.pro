@@ -16,7 +16,7 @@ SOURCES += libtest.cpp
 HEADERS += libtest.h\
         libtest_global.h
 
-#DESTDIR = $$_PRO_FILE_PWD_/../lib
+DESTDIR = $$_PRO_FILE_PWD_/../lib
 message($$_PRO_FILE_)
 message($$_PRO_FILE_PWD_)
 

@@ -1,7 +1,3 @@
-#ifdef VC
-  #include "stdafx.h"
-#endif
-
 #include "BoostClient.h"
 
 BoostClient::BoostClient( boost::asio::io_service& io_service )

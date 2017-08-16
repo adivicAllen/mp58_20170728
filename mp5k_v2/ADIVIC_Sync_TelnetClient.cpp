@@ -63,6 +63,7 @@ void ADIVIC_Sync_TelnetClient::Send(const std::string& cmd)
 	std::string CurrentCmd = cmd + EOL_MARK;
 	std::string CMD_Log = "Send: " + CurrentCmd;
 	ADIVIC_Logger::GetInstance().WriteLog(CMD_Log.c_str() );
+    m_TelnetImpl->ClientPtr->m_AckDeque.clear();
 	m_TelnetImpl->ClientPtr->SendCommand( CurrentCmd );
 }
 
@@ -79,15 +80,16 @@ bool ADIVIC_Sync_TelnetClient::IsWaitTillReadToken(std::string& ack, const std::
 		}
 
 		ack_temp = m_TelnetImpl->ClientPtr->m_AckDeque.front();
-		m_TelnetImpl->ClientPtr->m_AckDeque.pop_front();
-		int pos = ack_temp.find('\0');
-		if( pos != ack_temp.length()-1 && pos!= std::string::npos) 
-		{
-			m_TelnetImpl->ClientPtr->m_AckDeque.push_front( std::string( ack_temp , pos+1 , ack_temp.length() -pos+1) );
-		}
-		ack_temp = ack_temp.substr( 0, pos );
+        //m_TelnetImpl->ClientPtr->m_AckDeque.pop_front();
+        // int pos = ack_temp.find('\0');  // allen
+        //std::size_t pos = ack_temp.find('\0');
+        //if( pos != ack_temp.length()-1 && pos!= std::string::npos)
+        //{
+        //	m_TelnetImpl->ClientPtr->m_AckDeque.push_front( std::string( ack_temp , pos+1 , ack_temp.length() -pos+1) );
+        //}
+        //ack_temp = ack_temp.substr( 0, pos );
 
-		if (boost::algorithm::ifind_first(ack_temp, token))
+        if (boost::algorithm::ifind_first(ack_temp, token))
 		{
 			ack.assign( ack_temp );
 			std::string CMD_Log = "Receive: " + ack + "\n" ;
@@ -117,7 +119,8 @@ bool ADIVIC_Sync_TelnetClient::IsWaitTillReadToken(char* ack, const std::string&
 
 		ack_temp = m_TelnetImpl->ClientPtr->m_AckDeque.front();
 		m_TelnetImpl->ClientPtr->m_AckDeque.pop_front();
-		int pos = ack_temp.find('\0');
+        // int pos = ack_temp.find('\0');
+        std::size_t pos = ack_temp.find('\0');
 		if( pos != ack_temp.length()-1 && pos!= std::string::npos) 
 		{
 			m_TelnetImpl->ClientPtr->m_AckDeque.push_front( std::string( ack_temp , pos+1 , ack_temp.length() -pos+1) );

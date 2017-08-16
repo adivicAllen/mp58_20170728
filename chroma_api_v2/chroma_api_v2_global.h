@@ -1,0 +1,12 @@
+#ifndef CHROMA_API_V2_GLOBAL_H
+#define CHROMA_API_V2_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(CHROMA_API_V2_LIBRARY)
+#  define CHROMA_API_V2SHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define CHROMA_API_V2SHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // CHROMA_API_V2_GLOBAL_H

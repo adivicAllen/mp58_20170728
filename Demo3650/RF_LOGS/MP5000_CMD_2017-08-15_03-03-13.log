@@ -1,0 +1,29 @@
+[2017-Aug-15 03:03:13.221775] 	 open 2
+
+[2017-Aug-15 03:03:13.222876] 	 open 
+
+[2017-Aug-15 03:03:13.223181] 	 Send: INPut:STARt
+
+[2017-Aug-15 03:04:04.684887] 	 Receive: 0
+
+[2017-Aug-15 03:04:05.186388] 	 Send: TABLe:COUPled OFF
+
+
+[2017-Aug-15 03:04:16.142490] 	 Receive: 0
+
+[2017-Aug-15 03:04:16.143334] 	 Send: GPRF
+
+
+[2017-Aug-15 03:04:25.737389] 	 Receive: 0
+
+[2017-Aug-15 03:04:25.737654] 	 Send: INPut:FREQuency 2440.00MHz
+
+
+ceive: 0
+
+[2017-Aug-15 03:04:25.737654] 	 Send: INPut:FREQuency 2440.00MHz
+
+
+ 	 Send: INPut:FREQuency 2440.00MHz
+
+

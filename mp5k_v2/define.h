@@ -40,7 +40,7 @@ typedef enum _VoidDataType
 	_WString,
 	_Char,
 	_WChar,
-	_Bool
+    _Bool_   // C99 think it ia bool
 }VoidDataType;
 
 typedef enum _TYPE 

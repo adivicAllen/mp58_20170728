@@ -33,7 +33,6 @@ HEADERS += \
     ../MP5000_SCPI.h \
     ../resource.h \
     ../Sync_TelnetClient.h \
-    ../targetver.h \
     ../TOP_LEVEL.h \
     ../types.h
 
@@ -42,7 +41,8 @@ SOURCES += \
     ../ADIVIC_Sync_TelnetClient.cpp \
     ../BoostClient.cpp \
     ../mp5k_v2.cpp \
-    ../Sync_TelnetClient.cpp
+    ../Sync_TelnetClient.cpp \
+    ../types.cpp
 
 
 LIBS += -L"/home/allen/boost_1_61_0/stage/lib/"
@@ -55,3 +55,12 @@ DEFINES += _WINDLL \
           MP5K_V2_EXPORTS  \
          _UNICODE     \
          UNICODE
+
+DESTDIR = $$_PRO_FILE_PWD_/../../lib
+message($$_PRO_FILE_)
+message($$_PRO_FILE_PWD_)
+unix {
+    target.path = /usr/lib
+    INSTALLS += target
+}
+

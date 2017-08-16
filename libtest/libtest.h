@@ -2,6 +2,7 @@
 #define LIBTEST_H
 
 #include "libtest_global.h"
+#include <QVariant>
 
 class LIBTESTSHARED_EXPORT Libtest
 {
@@ -19,6 +20,10 @@ public:
 
 extern "C" {
 LIBTESTSHARED_EXPORT void showqt(); //showqt is a function
+}
+
+extern "C" {
+LIBTESTSHARED_EXPORT QVariant parseSetting(QString filePathName, QString sectionName, QString fieldName); //showqt is a function
 }
 
 #endif // LIBTEST_H
