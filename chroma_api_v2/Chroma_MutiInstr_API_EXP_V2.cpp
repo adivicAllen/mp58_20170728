@@ -183,7 +183,8 @@ CHROMA_API_DLLEXT USHORT  expMV2_InitFunction(const char *IniFilePath)
 				usState=MultiAPP[i].NetConnect(true);
 				for(unsigned int j=0;j<MultiAPP[0].s_vec_WaveformPath.size();j++)
 				{
-					CstringToString(MultiAPP[0].s_vec_WaveformPath.at(j),szWaveFormPath);
+                    szWaveFormPath = MultiAPP[0].s_vec_WaveformPath.at(j).toStdString();
+				//	CstringToString(MultiAPP[0].s_vec_WaveformPath.at(j),szWaveFormPath);
 					usState=MultiAPP[i].UploadWaveform(szWaveFormPath.c_str(),true);
 					Sleep(3000);
 				//	usState=MultiAPP[i]. SetCenterFrequency(2440.);  // allen

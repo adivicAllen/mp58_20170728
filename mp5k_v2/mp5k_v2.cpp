@@ -2461,7 +2461,7 @@ UINT mp5k_BT_tx_meas(const UINT& handle, MP5K_BT_TxTestMeas& Bt_Tx_Meas)
 			}
 			
             Tester->mp5k_list.at( handle )->Send( strBuffer );
-            bool IsReturn = Tester->mp5k_list.at( handle )->IsWaitTillReadToken( Return , "\n" );
+            bool IsReturn = Tester->mp5k_list.at( handle )->IsWaitTillReadToken( Return , "\0," );
 			if( !IsReturn )
 			{
 #if MP5KLOG

@@ -1,0 +1,528 @@
+[2017-Aug-14 02:44:07.108193] 	 open 2
+
+[2017-Aug-14 02:44:07.109641] 	 open 
+
+[2017-Aug-14 02:44:07.109839] 	 Send: INPut:STARt
+
+[2017-Aug-14 02:44:22.524598] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.025740] 	 Send: TABLe:COUPled OFF
+
+
+[2017-Aug-14 02:44:23.028775] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.029427] 	 Send: GPRF
+
+
+[2017-Aug-14 02:44:23.135202] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.136109] 	 Send: INPut:FREQuency 2440.00MHz
+
+
+[2017-Aug-14 02:44:23.145155] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.146069] 	 Send: INPut:SRATe 160 MHz
+
+
+[2017-Aug-14 02:44:23.150226] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.150882] 	 Send: CONFigure:GPRF:SPECtrum:RBW              [2017-Aug-14 02:44:23.150882] 	 Send: CONFigure:GPRF:SPE[2017-Aug-14 02:44:23.155035] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.155703] 	 Send: INPut:CAPTure:TIME?
+
+
+[2017-Aug-14 02:44:23.159817] 	 Receive: 5
+
+
+[2017-Aug-14 02:44:23.160417] 	 Send: INPut:LEVel:REFerence -10.00 dBm
+
+
+[2017-Aug-14 02:44:23.164523] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.165182] 	 Send: ROUTe:RESource:MAP VSA,RF1,OFF,RF2,OFF,RF[2017-Aug-14 02[2017-Aug-14 02:44:23.171504] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.171834] 	 Send: OUTPut:POWer:LEVel -10.00 dBm
+
+
+[2017-Aug-14 02:44:23.176681] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.177645] 	 Send: OUTPut:WAVeform:CWAV:OFFSet 0.000000MHz
+[20[2017-Aug-14 02:44:23.179649] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.179938] 	 Send: INPut:STARt
+
+
+[2017-Aug-14 02:44:23.183193] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.183665] 	 Send: OUTPut:LOOP:COUNt 0 
+
+
+[2017-Aug-14 02:44:23.185202] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.185488] 	 Send: OUTPut:STOP
+
+
+[2017-Aug-14 02:44:23.188226] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.188560] 	 Send: OUTPut:POWer:STATe OFF
+
+
+[2017-Aug-14 02:44:23.190766] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.191079] 	 Send: OUTPut:MODulation:STATe OFF
+
+
+[2017-Aug-14 02:44:23.193930] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.194256] 	 Send: CONFigure:RFCorrection:DISTribution OFF
+[20[2017-Aug-14 02:44:23.196131] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.196436] 	 Send: TABLe:LOSS:PORT1:TX:LOAD 
+
+
+[2017-Aug-14 02:44:23.198773] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.199069] 	 Send: TABLe:LOSS:PORT1:RX:LOAD 
+
+
+[2017-Aug-14 02:44:23.201602] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.201767] 	 Send: TABLe:LOSS:PORT2:TX:LOAD 
+
+
+[2017-Aug-14 02:44:23.203634] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.203797] 	 Send: TABLe:LOSS:PORT2:RX:LOAD 
+
+
+[2017-Aug-14 02:44:23.205622] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.205784] 	 Send: TABLe:LOSS:PORT3:TX:LOAD 
+
+
+[2017-Aug-14 02:44:23.207697] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.207860] 	 Send: TABLe:LOSS:PORT3:RX:LOAD 
+
+
+[2017-Aug-14 02:44:23.210608] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.210771] 	 Send: TABLe:LOSS:PORT4:TX:LOAD 
+
+
+[2017-Aug-14 02:44:23.212661] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.212845] 	 Send: TABLe:LOSS:PORT4:RX:LOAD 
+
+
+[2017-Aug-14 02:44:23.215614] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.215777] 	 Send: INPut:GPRF:MARKer:CLEar
+
+
+[2017-Aug-14 02:44:23.217050] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.217211] 	 Send: INPut:MARKer:FIG4:CLEar
+
+
+[2017-Aug-14 02:44:23.219084] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.219248] 	 Send: TABLe:DELete TX_Port_1
+
+
+[2017-Aug-14 02:44:23.221212] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.221375] 	 Send: TABLe:DELete RX_Port_1
+
+
+[2017-Aug-14 02:44:23.223187] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.223349] 	 Send: TABLe:DELete TX_Port_2
+
+
+[2017-Aug-14 02:44:23.225202] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.225365] 	 Send: TABLe:DELete RX_Port_2
+
+
+[2017-Aug-14 02:44:23.227187] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.227349] 	 Send: TABLe:DELete TX_Port_3
+
+
+[2017-Aug-14 02:44:23.229169] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.229331] 	 Send: TABLe:DELete RX_Port_3
+
+
+[2017-Aug-14 02:44:23.231152] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.231315] 	 Send: TABLe:DELete TX_Port_4
+
+
+[2017-Aug-14 02:44:23.233151] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.233314] 	 Send: TABLe:DELete RX_Port_4
+
+
+[2017-Aug-14 02:44:23.235164] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.235328] 	 Send: TABLe:CLEar
+
+
+[2017-Aug-14 02:44:23.237042] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.237207] 	 Send: TABLe TX_Port_1
+
+
+[2017-Aug-14 02:44:23.239095] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.239272] 	 Send: TABLe:POINt:INSert 2400.00MHz,8.89
+
+
+[2017-Aug-14 02:44:23.241036] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.241200] 	 Send: TABLe:POINt:INSert 2410.00MHz,8.90
+
+
+[2017-Aug-14 02:44:23.243036] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.243199] 	 Send: TABLe:POINt:INSert 2420.00MHz,8.77
+
+
+[2017-Aug-14 02:44:23.245023] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.245195] 	 Send: TABLe:POINt:INSert 2430.00MHz,8.90
+
+
+[2017-Aug-14 02:44:23.247039] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.247202] 	 Send: TABLe:POINt:INSert 2440.00MHz,8.83
+
+
+[2017-Aug-14 02:44:23.249050] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.249213] 	 Send: TABLe:POINt:INSert 2450.00MHz,8.90
+
+
+[2017-Aug-14 02:44:23.251071] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.251234] 	 Send: TABLe:POINt:INSert 2460.00MHz,8.83
+
+
+[2017-Aug-14 02:44:23.253037] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.253201] 	 Send: TABLe:POINt:INSert 2470.00MHz,8.86
+
+
+[2017-Aug-14 02:44:23.255037] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.255201] 	 Send: TABLe:POINt:INSert 2480.00MHz,8.77
+
+
+[2017-Aug-14 02:44:23.257045] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.257208] 	 Send: TABLe:STORe 
+
+
+[2017-Aug-14 02:44:23.259208] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.259369] 	 Send: TABLe:CLEar
+
+
+[2017-Aug-14 02:44:23.261150] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.261488] 	 Send: TABLe RX_Port_1
+
+
+[2017-Aug-14 02:44:23.263201] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.263514] 	 Send: TABLe:POINt:INSert 2400.00MHz,9.53
+
+
+[2017-Aug-14 02:44:23.265301] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.265636] 	 Send: TABLe:POINt:INSert 2410.00MHz,9.49
+
+
+[2017-Aug-14 02:44:23.268168] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.268510] 	 Send: TABLe:POINt:INSert 2420.00MHz,9.64
+
+
+[2017-Aug-14 02:44:23.270273] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.270588] 	 Send: TABLe:POINt:INSert 2430.00MHz,9.58
+
+
+[2017-Aug-14 02:44:23.273093] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.273433] 	 Send: TABLe:POINt:INSert 2440.00MHz,9.70
+
+
+[2017-Aug-14 02:44:23.275191] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.275507] 	 Send: TABLe:POINt:INSert 2450.00MHz,9.61
+
+
+[2017-Aug-14 02:44:23.278104] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.278443] 	 Send: TABLe:POINt:INSert 2460.00MHz,9.70
+
+
+[2017-Aug-14 02:44:23.280243] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.280565] 	 Send: TABLe:POINt:INSert 2470.00MHz,9.63
+
+
+[2017-Aug-14 02:44:23.283144] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.283484] 	 Send: TABLe:POINt:INSert 2480.00MHz,9.72
+
+
+[2017-Aug-14 02:44:23.285282] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.285615] 	 Send: TABLe:STORe 
+
+
+[2017-Aug-14 02:44:23.288782] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.289116] 	 Send: TABLe:CLEar
+
+
+[2017-Aug-14 02:44:23.291046] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.291209] 	 Send: TABLe TX_Port_2
+
+
+[2017-Aug-14 02:44:23.293044] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.293209] 	 Send: TABLe:POINt:INSert 2400.00MHz,8.89
+
+
+[2017-Aug-14 02:44:23.295037] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.295209] 	 Send: TABLe:POINt:INSert 2410.00MHz,8.92
+
+
+[2017-Aug-14 02:44:23.297047] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.297210] 	 Send: TABLe:POINt:INSert 2420.00MHz,8.81
+
+
+[2017-Aug-14 02:44:23.299016] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.299179] 	 Send: TABLe:POINt:INSert 2430.00MHz,8.91
+
+
+[2017-Aug-14 02:44:23.301046] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.301210] 	 Send: TABLe:POINt:INSert 2440.00MHz,8.84
+
+
+[2017-Aug-14 02:44:23.303045] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.303208] 	 Send: TABLe:POINt:INSert 2450.00MHz,8.90
+
+
+[2017-Aug-14 02:44:23.305021] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.305178] 	 Send: TABLe:POINt:INSert 2460.00MHz,8.84
+
+
+[2017-Aug-14 02:44:23.307021] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.307176] 	 Send: TABLe:POINt:INSert 2470.00MHz,8.90
+
+
+[2017-Aug-14 02:44:23.309027] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.309183] 	 Send: TABLe:POINt:INSert 2480.00MHz,8.82
+
+
+[2017-Aug-14 02:44:23.311027] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.311183] 	 Send: TABLe:STORe 
+
+
+[2017-Aug-14 02:44:23.313603] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.313762] 	 Send: TABLe:CLEar
+
+
+[2017-Aug-14 02:44:23.314998] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.315151] 	 Send: TABLe RX_Port_2
+
+
+[2017-Aug-14 02:44:23.317037] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.317197] 	 Send: TABLe:POINt:INSert 2400.00MHz,9.55
+
+
+[2017-Aug-14 02:44:23.318940] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.319095] 	 Send: TABLe:POINt:INSert 2410.00MHz,9.48
+
+
+[2017-Aug-14 02:44:23.320985] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.321141] 	 Send: TABLe:POINt:INSert 2420.00MHz,9.61
+
+
+[2017-Aug-14 02:44:23.321947] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.322098] 	 Send: TABLe:POINt:INSert 2430.00MHz,9.50
+
+
+[2017-Aug-14 02:44:23.324010] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.324167] 	 Send: TABLe:POINt:INSert 2440.00MHz,9.65
+
+
+[2017-Aug-14 02:44:23.324981] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.325132] 	 Send: TABLe:POINt:INSert 2450.00MHz,9.58
+
+
+[2017-Aug-14 02:44:23.326980] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.327134] 	 Send: TABLe:POINt:INSert 2460.00MHz,9.62
+
+
+[2017-Aug-14 02:44:23.327956] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.328108] 	 Send: TABLe:POINt:INSert 2470.00MHz,9.60
+
+
+[2017-Aug-14 02:44:23.330020] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.330173] 	 Send: TABLe:POINt:INSert 2480.00MHz,9.68
+
+
+[2017-Aug-14 02:44:23.330977] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.331127] 	 Send: TABLe:STORe 
+
+
+[2017-Aug-14 02:44:23.333234] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.333388] 	 Send: TABLe:LOSS:PORT1:TX:LOAD TX_Port_1
+
+
+[2017-Aug-14 02:44:23.335762] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.335916] 	 Send: TABLe:LOSS:PORT1:RX:LOAD RX_Port_1
+
+
+[2017-Aug-14 02:44:23.338699] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.338852] 	 Send: TABLe:LOSS:PORT2:TX:LOAD TX_Port_2
+
+
+[2017-Aug-14 02:44:23.340725] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.340916] 	 Send: TABLe:LOSS:PORT2:RX:LOAD RX_Port_2
+
+
+[2017-Aug-14 02:44:23.343674] 	 Receive: 0
+
+
+[2017-Aug-14 02:44:23.343828] 	 Send: CONFigure:RFCorrection:DISTribution ON
+[2[2017-Aug-14 02:44:23.345045] 	 Receive: 0
+
+
+:RFCorrection:DISTribution ON
+
+
+[2017-Aug-14 02:44:23.345045] 	 Receive: 0
+
+
+-Aug-14 02:44:23.345045] 	 Receive: 0
+
+

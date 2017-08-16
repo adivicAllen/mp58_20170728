@@ -3,6 +3,8 @@
 #include <QSettings>
 #include <QDebug>
 #include "Chroma_API_V2.h"
+#include <QDir>
+#include <QFileInfo>
 //#include "libtest.h"
 
 
@@ -470,13 +472,17 @@ USHORT CChroma_API_V2::NetConnect(bool bIsConnect)
 		else
 		{   // net use \\\\169.254.54.170\\USER user:adivic
 			// net use \\169.254.54.170\USER user:adivic
-			sprintf_s(szBuf,"net use \\\\%s\\%s \"\" /%s:adivic",stdStr_IP_Address.c_str(),UserFolder,UserFolder);
-			system(szBuf);
+            //sprintf_s(szBuf,"net use \\\\%s\\%s \"\" /%s:adivic",stdStr_IP_Address.c_str(),UserFolder,UserFolder);
+            // smbclient -N //192.168.101.50/USER
+         //   sprintf_s(szBuf,"smbclient -N //%s/USER",stdStr_IP_Address.c_str());
+        //	system(szBuf);
 		}
 	}else
 	{
+        /*  allen
 		sprintf_s(szBuf,"net use \\\\%s\\%s delete",stdStr_IP_Address.c_str(),UserFolder);
 		system(szBuf);
+        */
 	}
 	
 	return SUCCESS;
@@ -491,9 +497,19 @@ USHORT CChroma_API_V2::UploadWaveform(const char *WaveformPath,bool bIsOverLoad)
 		return E_Server_NO_CONNECT;
 	else
 	{
-		sprintf_s(szBuf,"copy %s \\\\%s\\%s",WaveformPath,stdStr_IP_Address.c_str(),UserFolder);
-		system(szBuf);
-	
+        QString tPath ;
+        QFileInfo  f(static_cast<QString>(WaveformPath));
+        tPath = f.absolutePath();
+
+        QString tName;
+        tName = f.fileName();
+
+        
+    //	sprintf_s(szBuf,"copy %s \\\\%s\\%s",WaveformPath,stdStr_IP_Address.c_str(),UserFolder);
+        sprintf_s(szBuf,"smbclient -N //%s/USER -c 'lcd %s; put %s'",stdStr_IP_Address.c_str(), tPath.toStdString().c_str(), tName.toStdString().c_str());
+        system(szBuf);
+     //   system("smbclient -N //192.168.101.50/USER - c 'lcd %s; put BER_gfsk_120M_192ms_no_header_u1.wfm'" );
+
 		if(bIsOverLoad)
 		{
 			system("Yes");

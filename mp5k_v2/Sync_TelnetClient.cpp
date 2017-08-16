@@ -1,4 +1,9 @@
 #include "Sync_TelnetClient.h"
+#include <QString>
+#include <QDebug>
+#include "types.h"
+
+#include <iostream>
 
 
 
@@ -49,14 +54,32 @@ void Sync_TelnetClient::SendCommand(const std::string& cmd)
 
 void Sync_TelnetClient::ReadAck()
 {
+    /*
 	char ack_Buffer[512] = {"0"};
 
 	this->readWithTimeout(boost::asio::buffer(ack_Buffer, 512));
 	
 	std::string temp(ack_Buffer,512 );
+    */
+    char ack_Buffer[64] = {"0"};
+    std::cout<< "0";
+    Sleep(5);
+    this->readWithTimeout(boost::asio::buffer(ack_Buffer, 64));
+     Sleep(5);
+    std::cout<< "1";
+    std::string temp(ack_Buffer, 64);
+    std::cout<< "2";
+     Sleep(5);
+    QString tDebug = QString::fromStdString(temp);
+    std::cout<< "3";
 
-
+   //  qDebug()<< "temp :"<< tDebug << endl;
 	m_AckDeque.push_back( temp );
+     Sleep(5);
+    tDebug = QString::fromStdString(m_AckDeque.back());
+   //  qDebug()<< "queue :" << tDebug << endl;
+     std::cout<< "4";
+
 }
 
 template <typename MutableBufferSequence>
@@ -66,7 +89,7 @@ void Sync_TelnetClient::readWithTimeout(const MutableBufferSequence& buffers)
 	boost::optional<boost::system::error_code> read_result;
 
     boost::asio::deadline_timer timer(m_ioService_ptr); 
-	timer.expires_from_now(boost::posix_time::seconds(5)); 
+    timer.expires_from_now(boost::posix_time::seconds(5)); // allen
     timer.async_wait(boost::bind(&Sync_TelnetClient::set_result, this, &timer_result, _1)); 
 
 	
