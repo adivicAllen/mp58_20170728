@@ -10,10 +10,10 @@ TARGET = chroma_API_v2
 TEMPLATE = lib
 
 DEFINES += CHROMA_API_V2_LIBRARY
-INCLUDEPATH +=/home/allen/mp58_20170728/MP5800_API \
-              /home/allen/mp58_20170728/mp5k_v2    \
-              /home/allen/boost_1_61_0             \
-              /home/allen/mp58_20170728/libtest
+INCLUDEPATH +=/home/adivic/mp58_20170728/MP5800_API \
+              /home/adivic/mp58_20170728/mp5k_v2    \
+              /home/adivic/boost_1_61_0             \
+              /home/adivic/mp58_20170728/libtest
 
 SOURCES += chroma_api_v2.cpp \
     Chroma_API_V2.cpp \

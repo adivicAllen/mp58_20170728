@@ -12,9 +12,9 @@ TEMPLATE = lib
 DEFINES += MP5800_API_LIBRARY  \
            MP5800_API_EXPORTS
 
-INCLUDEPATH += /home/allen/mp58_20170728/chroma_api_v2    \
-               /home/allen/mp58_20170728/mp5k_v2          \
-               /home/allen/mp58_20170728/MP5800_API
+INCLUDEPATH += /home/adivic/mp58_20170728/chroma_api_v2    \
+               /home/adivic/mp58_20170728/mp5k_v2          \
+               /home/adivic/mp58_20170728/MP5800_API
 
 SOURCES += mp5800_api.cpp \
     ../MP5800_API.cpp

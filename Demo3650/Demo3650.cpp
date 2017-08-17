@@ -670,7 +670,7 @@ void AdivicTest()
 	
    for (int ii=0;ii<1;ii++)
    {
-       /*
+/*
 		for(int i=0;i<3;i++)
 		{
 			  if  ( CWTestSub(i)   )
@@ -754,7 +754,7 @@ void AdivicTest()
 				 wifiMCS = MCS8;
 			}
 			else
-        pop_front	{
+            {
 				 wifiMCS = MCS9;
 			}
 			
@@ -770,7 +770,7 @@ void AdivicTest()
 			 
 		}
    // system("pause");
-    */
+*/
      // ======================BDR ===================
     for( int i= DH1 ; i<= DH5; i++ )
 	{

@@ -5,8 +5,6 @@
 
 #include <iostream>
 
-
-
 Sync_TelnetClient::Sync_TelnetClient(boost::asio::io_service& io_service) :
 m_Socket_ptr(io_service), m_ioService_ptr(io_service ),m_deadtimer( m_ioService_ptr,boost::posix_time::seconds(5))
 {
@@ -61,24 +59,14 @@ void Sync_TelnetClient::ReadAck()
 	
 	std::string temp(ack_Buffer,512 );
     */
-    char ack_Buffer[64] = {"0"};
-    std::cout<< "0";
-    Sleep(5);
-    this->readWithTimeout(boost::asio::buffer(ack_Buffer, 64));
-     Sleep(5);
-    std::cout<< "1";
-    std::string temp(ack_Buffer, 64);
-    std::cout<< "2";
-     Sleep(5);
-    QString tDebug = QString::fromStdString(temp);
-    std::cout<< "3";
+    char ack_Buffer[512] = {""};   
 
-   //  qDebug()<< "temp :"<< tDebug << endl;
+    this->readWithTimeout(boost::asio::buffer(ack_Buffer, 512));
+
+    std::string temp(ack_Buffer, 512);
+
 	m_AckDeque.push_back( temp );
-     Sleep(5);
-    tDebug = QString::fromStdString(m_AckDeque.back());
-   //  qDebug()<< "queue :" << tDebug << endl;
-     std::cout<< "4";
+
 
 }
 

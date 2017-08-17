@@ -3,7 +3,7 @@ QT       -= gui
 
 TEMPLATE = lib
 CONFIG += c++11
-INCLUDEPATH += /home/allen/boost_1_61_0
+INCLUDEPATH += /home/adivic/boost_1_61_0
 
 SUBDIRS += \
     ../mp5000.pro
@@ -45,7 +45,7 @@ SOURCES += \
     ../types.cpp
 
 
-LIBS += -L"/home/allen/boost_1_61_0/stage/lib/"
+LIBS += -L"/home/adivic/boost_1_61_0/stage/lib/"
 DEFINES += _WINDLL \
            MFG_LOG \
 #            WIN32   \

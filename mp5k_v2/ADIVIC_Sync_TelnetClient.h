@@ -39,10 +39,6 @@ class   ADIVIC_TCLIENT_API   ADIVIC_Sync_TelnetClient
 #else
 class    ADIVIC_Sync_TelnetClient
 #endif
-
-//__attribute__ ((visibility ("default")))
-// class  __attribute__ ((dllexport)) ADIVIC_Sync_TelnetClient
-//class  __attribute__ ((visibility ("default"))) ADIVIC_Sync_TelnetClient
 {
 public:
 	ADIVIC_Sync_TelnetClient(const std::string&);

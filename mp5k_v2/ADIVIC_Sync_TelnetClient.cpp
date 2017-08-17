@@ -80,14 +80,16 @@ bool ADIVIC_Sync_TelnetClient::IsWaitTillReadToken(std::string& ack, const std::
 		}
 
 		ack_temp = m_TelnetImpl->ClientPtr->m_AckDeque.front();
-        //m_TelnetImpl->ClientPtr->m_AckDeque.pop_front();
+        m_TelnetImpl->ClientPtr->m_AckDeque.pop_front();
         // int pos = ack_temp.find('\0');  // allen
-        //std::size_t pos = ack_temp.find('\0');
-        //if( pos != ack_temp.length()-1 && pos!= std::string::npos)
-        //{
-        //	m_TelnetImpl->ClientPtr->m_AckDeque.push_front( std::string( ack_temp , pos+1 , ack_temp.length() -pos+1) );
-        //}
-        //ack_temp = ack_temp.substr( 0, pos );
+        std::size_t pos = ack_temp.find('\0');
+
+        if( pos != ack_temp.length()-1 && pos!= std::string::npos)
+        {
+            m_TelnetImpl->ClientPtr->m_AckDeque.push_front( std::string( ack_temp , pos+1 , ack_temp.length() -pos+1) );
+     //       m_TelnetImpl->ClientPtr->m_AckDeque.push_front(  tempS );
+        }
+        ack_temp = ack_temp.substr( 0, pos );
 
         if (boost::algorithm::ifind_first(ack_temp, token))
 		{
@@ -97,7 +99,8 @@ bool ADIVIC_Sync_TelnetClient::IsWaitTillReadToken(std::string& ack, const std::
 			return true;
 		}
 		timer_count = timeout_timer.elapsed() * 1000;
-	} while (timer_count < timeout_ms);
+    } while (timer_count < timeout_ms);
+
 	ADIVIC_Logger::GetInstance().WriteLog("Receive TimeOut\n" );
 	return false;
 	

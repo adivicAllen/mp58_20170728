@@ -16,7 +16,7 @@ bool mp5k::LoadDll(void)
 {
 
 
-    api.mp5kLib.setFileName("/home/allen/mp58_20170728/lib/libmp5k_v2.so");
+    api.mp5kLib.setFileName("/home/adivic/mp58_20170728/lib/libmp5k_v2.so");
 
     if (!api.mp5kLib.load())
 	{
